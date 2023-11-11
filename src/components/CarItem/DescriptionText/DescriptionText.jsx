@@ -4,11 +4,11 @@ import { WrapperText } from "./DescriptionText.styled";
 export const DescriptionText = ({ car }) => {
   const {
     id,
-    make,
+    // make,
     type,
     model,
-    year,
-    rentalPrice,
+    // year,
+    // rentalPrice,
     address,
     rentalCompany,
     accessories,
