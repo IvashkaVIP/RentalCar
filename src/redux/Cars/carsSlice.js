@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-import { getCars } from '../../fakeAPI';
-// import { createReducer } from '@reduxjs/toolkit';
-// import { addFavoriteCar, deleteFavoriteCar } from './carsOperations';
+import { fetchCars } from '../Cars/carsOperations';
+import { nanoid } from 'nanoid';
 
 const carsInitialState = {
-  allCars: getCars(),
+  allCars: [],
   favoriteCarsId: [],
+  endOfData: null,
   isError: false,
   isLoading: false,
 };
@@ -22,6 +21,28 @@ const carsSlice = createSlice({
       state.favoriteCarsId = state.favoriteCarsId.filter(
         carId => carId !== action.payload
       );
+    },
+  },
+  extraReducers: {
+    [fetchCars.pending](state) {
+      state.isLoading = true;
+    },
+    [fetchCars.fulfilled](state, action) {
+      state.isLoading = false;
+      state.isError = null;
+
+      const newCars = action.payload.map(car => ({ _id: nanoid(), ...car }));
+      state.allCars = [...state.allCars, ...newCars];
+
+      if (newCars.length < action.meta.arg.limit) {
+        state.endOfData = true;
+      } else {
+        state.endOfData = false;
+      }
+    },
+    [fetchCars.rejected](state, action) {
+      state.isLoading = false;
+      state.isError = action.payload;
     },
   },
 });

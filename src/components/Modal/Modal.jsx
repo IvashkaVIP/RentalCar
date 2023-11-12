@@ -40,8 +40,7 @@ export const Modal = ({ car, closeModal }) => {
     if (evt.currentTarget === evt.target) {
       closeModal();
     }
-  };
-  console.log(car)
+  };  
   return createPortal(
     <>
       <Overlay onClick={handleBackdropClick}>

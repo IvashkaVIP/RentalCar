@@ -8,12 +8,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyles } from 'GlobalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter basename="/RentalCar">
         <GlobalStyles />
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
-);
+  // </React.StrictMode> 
+)
