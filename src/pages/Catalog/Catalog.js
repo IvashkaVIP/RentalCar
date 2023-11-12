@@ -1,8 +1,10 @@
+import { useSelector } from 'react-redux';
+import { getAllCars } from 'redux/Cars/carsSelectors';
 import { CarsList } from '../../components';
-import { getCars } from '../../fakeAPI';
+
 
 export const Catalog = () => {
-  const cars = getCars();
+  const cars=useSelector(getAllCars)
   return (
     <>
       <CarsList cars={cars} />

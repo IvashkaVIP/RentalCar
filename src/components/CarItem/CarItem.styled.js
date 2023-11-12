@@ -10,15 +10,15 @@ export const WrapperCard = styled.div`
 
 export const WrapperIcon = styled.div`
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: ${props => (props.offset ? props.offset : '0')};
+  right: ${props => (props.offset ? props.offset : '0')};
   user-select: none;
   cursor: pointer;
 `;
 
 export const WrapperImage = styled.div`
   width: 100%;
-  height: 268px;
+  height: ${(props) => (props.height ? props.height : '100%')};
   margin-bottom: 14px;
   border-radius: 14px;
   overflow: hidden;
@@ -38,7 +38,7 @@ export const GradientOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #121417, rgba(18, 20, 23, 0) 50%);
+  background: linear-gradient(to bottom, var(--dark-text-color), rgba(18, 20, 23, 0) 50%);
 `;
 
 export const WrapperMainBlock = styled.div``;

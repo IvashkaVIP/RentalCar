@@ -7,5 +7,5 @@ export const WrapperText = styled.p`
   color: var(--light-grey-text-color);
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;  
 `;

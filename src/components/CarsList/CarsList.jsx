@@ -5,18 +5,19 @@ import { CarItem } from '../CarItem/CarItem';
 import { Modal } from '../../components';
 
 export const CarsList = ({ cars }) => {
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
-    
-   return (
-     <Container>
-       {cars.map(car => (
-         <CarItem openModal={openModal} key={cars.indexOf(car)} car={car} />
-       ))}
-       {showModal && <Modal closeModal={closeModal} />}
-     </Container>
-   );
+  const [selectedCarId, setSelectedCarId] = useState(null);
+  const openModal = id => setSelectedCarId(id);
+  const closeModal = () => setSelectedCarId(null);
+  const getSelectedCarById = () => cars.find(car => car._id === selectedCarId);
+
+  return (
+    <Container>
+      {cars.map(car => (
+        <CarItem key={car._id} car={car} openModal={openModal} />
+      ))}
+      {selectedCarId && <Modal car={getSelectedCarById()} closeModal={closeModal} />}
+    </Container>
+  );
 };
 
 CarsList.propTypes = {
