@@ -1,36 +1,12 @@
-import {getCars} from "../fakeAPI"
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { carsReducer } from './Cars/carsSlice';
+// import { carsReducer } from './Cars/carsReducers';
+import { filtersReducer } from './Filters/filtersReducers';
 
-const initialState = {
-    allCars: getCars(),
-    favoriteCarsId:[],
-    isError: false,
-    isLoading: false
-};
-
-export const rootReducer = (state = initialState, action) => {
-  
-    switch (action.type) {
-      case 'allCars/addFavorite':
-        return {
-          ...state,
-          favoriteCarsId: [...state.favoriteCarsId, action.payload],
-        };
-      case 'allCars/deleteFavorite':
-        return {
-          ...state,
-          favoriteCarsId: state.favoriteCarsId.filter(
-            carId => carId !== action.payload
-          ),
-        };
-
-      default:
-        return state;
-    }
-
-    // return state;
-}
-
+export const rootReducer = combineReducers({
+    cars: carsReducer,
+    filters: filtersReducer,  
+})
 
 export const store = configureStore({
   reducer: rootReducer,

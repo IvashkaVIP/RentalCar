@@ -1,16 +1,27 @@
 import { useSelector } from 'react-redux';
-import { getAllCars, getFavoriteCarsId, getError } from 'redux/Cars/carsSelectors';
+import { carsSelectors } from 'redux/Cars/carsSelectors';
 import { CarsList } from '../../components';
 
 export const Favorites = () => {
-  const isError = useSelector(getError);
-  const allCars = useSelector(getAllCars);
-    const favoriteCarsId = useSelector(getFavoriteCarsId);
-    const favoriteCars = allCars.filter(item => favoriteCarsId.includes(item._id));
+  const isError = useSelector(carsSelectors.getError);
+  const allCars = useSelector(carsSelectors.getAllCars);
+  const favoriteCarsId = useSelector(carsSelectors.getFavoriteCarsId);
+  const favoriteCars = allCars.filter(item =>
+    favoriteCarsId.includes(item._id)
+  );
   return (
     <main>
-      <CarsList cars={favoriteCars} />
-      {isError && <h1 style={{ textAlign: 'center' }}>Favorites page</h1>}
+      {isError ? (
+        <h1 style={{ textAlign: 'center' }}>
+        something went wrong</h1>
+      ) :
+        !favoriteCarsId.length ? (
+        <h1 style={{ textAlign: 'center' }}>
+          there are no selected cars in your list
+        </h1>
+      ) : (
+        <CarsList cars={favoriteCars} />
+      )}
     </main>
   );
 };

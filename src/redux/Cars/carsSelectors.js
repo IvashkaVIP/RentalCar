@@ -1,3 +1,9 @@
-export const getAllCars = state => state.allCars;
-export const getFavoriteCarsId = state => state.favoriteCarsId;
-export const getError = state => state.isError;
+const getAllCars = state => state.cars.allCars;
+const getFavoriteCarsId = state => state.cars.favoriteCarsId;
+const getError = state => state.cars.isError;
+
+export const carsSelectors = {
+    getAllCars,
+    getFavoriteCarsId,
+    getError
+}

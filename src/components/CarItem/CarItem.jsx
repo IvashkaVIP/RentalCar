@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavoriteCarsId } from 'redux/Cars/carsSelectors';
+import { carsSelectors } from 'redux/Cars/carsSelectors';
 import {
   addFavoriteCar,
   deleteFavoriteCar,
@@ -20,7 +20,7 @@ import { ReactComponent as FavoriteHeartIcon } from '../Svg/activeHeart.svg';
 
 export const CarItem = ({ car, openModal }) => {
   const { _id, make, img, photoLink } = car;  
-  const favoriteCarsId = useSelector(getFavoriteCarsId);
+  const favoriteCarsId = useSelector(carsSelectors.getFavoriteCarsId);
     const dispatch = useDispatch();
     const isFavoriteCar = () => favoriteCarsId.includes(_id);
   const toggleHeart = () => {
