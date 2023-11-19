@@ -1,19 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home, Catalog, Favorites } from '../pages';
-import { NotFound, Navigation } from '../components';
-import { Container } from './App.styled';
-
+import { SharedLayout, NotFound } from '../components';
 
 export const App = () => {
   return (
-    <Container>
-      <Navigation/>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/catalog" element={<Catalog />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="*" element={<NotFound />} />
-      </Routes>
-      </Container>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="catalog" element={<Catalog />} />
+        <Route path="favorites" element={<Favorites />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };

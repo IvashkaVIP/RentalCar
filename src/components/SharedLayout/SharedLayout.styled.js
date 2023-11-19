@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+export const Container = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+`;
+
 export const Header = styled.header`
   top: 0;
   left: 0;
@@ -30,6 +36,9 @@ export const WrapperContent = styled.div`
 `;
 
 export const Logo = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   margin: 0;
 `;

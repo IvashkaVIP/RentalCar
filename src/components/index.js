@@ -1,4 +1,4 @@
-import { Navigation } from './Navigation/Navigation';
+import { SharedLayout } from './SharedLayout/SharedLayout';
 import { CarsList } from './CarsList/CarsList';
 import { CarItem } from './CarItem/CarItem';
 import { TitleText } from '../components/CarItem/TitleText/TitleText';
@@ -10,7 +10,7 @@ import { NoFavorites } from './NoFavorites/NoFavorites'
 import { NotFound } from './NotFound/NotFound';
 
 export {
-  Navigation,
+  SharedLayout,
   CarsList,
   CarItem,
   TitleText,
