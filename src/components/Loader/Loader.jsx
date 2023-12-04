@@ -3,15 +3,15 @@ import { RotatingLines } from 'react-loader-spinner';
 export const Loader = ({ display }) => (
   <div
     style={{
-    //   display: display,
-            justifyContent: 'center',
-        alignItems: 'center',
+      display: "flex",
+      justifyContent: 'center',
+      alignItems: 'center',      
       width: '100%',
-height:'100%',
+      height: '100vh',
     }}
   >
     <RotatingLines
-      strokeColor={"grey"}
+      strokeColor={'grey'}
       strokeWidth="5"
       animationDuration="0.75"
       width="10%"
@@ -19,4 +19,3 @@ height:'100%',
     />
   </div>
 );
-
