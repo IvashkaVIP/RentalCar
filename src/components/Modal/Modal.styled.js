@@ -27,3 +27,10 @@ font-size: 14px;
 font-weight: 400;
 line-height: 20px;
 `;
+
+export const TitleTextBlock = styled.h4`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #121417;
+`;

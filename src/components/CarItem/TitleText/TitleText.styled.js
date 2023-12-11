@@ -4,7 +4,7 @@ export const WrapperMainText = styled.div`
 display: flex;
 justify-content: space-between;
 padding-right: 10px;
-margin-bottom: 8px;
+/* margin-bottom: 8px; */
 `;
 
 export const MainText = styled.p`

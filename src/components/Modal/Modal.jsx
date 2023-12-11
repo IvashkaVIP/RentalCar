@@ -1,22 +1,22 @@
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import {
   Overlay,
   ContainerModal,
   // DescriptionText,
   Description,
+  TitleTextBlock,
 } from '../Modal/Modal.styled';
 import {
   // WrapperCard,
   WrapperIcon,
   WrapperImage,
-    StyleImage,
+  StyleImage,
   // GradientOverlay,
   // LearnMoreButton,
   // WrapperMainBlock,
 } from '../CarItem/CarItem.styled';
-import { TitleText } from "../CarItem/TitleText/TitleText"
+import { TitleText } from '../CarItem/TitleText/TitleText';
 import { WrapperText } from '../CarItem/DescriptionText/DescriptionText.styled';
 import { ReactComponent as CloseIcon } from '../Svg/x.svg';
 
@@ -40,7 +40,7 @@ export const Modal = ({ car, closeModal }) => {
     if (evt.currentTarget === evt.target) {
       closeModal();
     }
-  };  
+  };
   return createPortal(
     <>
       <Overlay onClick={handleBackdropClick}>
@@ -52,8 +52,20 @@ export const Modal = ({ car, closeModal }) => {
             <StyleImage src={img || photoLink} alt={make} />
           </WrapperImage>
           <TitleText car={car} fontSize={'18px'} price={false} />
-          <DescriptionTextModal car={car} style={{marginBottom: "14px"} } />
-          <Description>{description}</Description>
+          <DescriptionTextList car={car} style={{ marginTop: '8px' }} />
+          <Description style={{ marginTop: '14px' }}>{description}</Description>
+
+          <TitleTextBlock style={{ marginTop: '24px' }}>
+            Accessories and functionalities:
+          </TitleTextBlock>
+          <SupportingTextList car={car} style={{ marginTop: '8px' }} />
+
+          <TitleTextBlock style={{ marginTop: '24px' }}>
+            Rental Conditions:
+          </TitleTextBlock>
+
+          <RentalConditionalList car={car} style={{ marginTop: '8px' }} />
+
         </ContainerModal>
       </Overlay>
     </>,
@@ -61,7 +73,25 @@ export const Modal = ({ car, closeModal }) => {
   );
 };
 
-export const DescriptionTextModal = ({ car, style }) => {
+export const RentalConditionalList = ({ car, style }) => {
+  const {
+    rentalPrice,
+    rentalConditions,
+    mileage } = car;
+  
+  
+  console.log(rentalPrice)
+  console.log(rentalConditions);
+  console.log(mileage);
+
+  return <>
+  
+  </>
+
+}
+
+
+export const DescriptionTextList = ({ car, style }) => {
   const {
     id,
     // make,
@@ -97,8 +127,8 @@ export const DescriptionTextModal = ({ car, style }) => {
   // console.log(getCity())
 
   return (
-    <>
-      <WrapperText style={{ marginBottom: '4px' }}>
+    <div style={style}>
+      <WrapperText>
         {getCity()}
         <Separator />
         {getCountry()}
@@ -110,7 +140,7 @@ export const DescriptionTextModal = ({ car, style }) => {
         Type: {formatingType()}
         {/* {rentalCompany} */}
       </WrapperText>
-      <WrapperText style={style}>
+      <WrapperText style={{ marginTop: '4px' }}>
         Fuel Consumption: {fuelConsumption}
         {/* {formatingType()} */}
         {/* <Separator /> */}
@@ -121,37 +151,37 @@ export const DescriptionTextModal = ({ car, style }) => {
         <Separator />
         {/* {getMainAccessories()} */}
       </WrapperText>
-    </>
+    </div>
+  );
+};
+
+export const SupportingTextList = ({ car, style }) => {
+  const { accessories, functionalities } = car;
+
+  return (
+    <div style={style}>
+      <WrapperText>
+        {accessories.map(accessori => (
+          <>
+            {accessori}
+            <Separator />
+          </>
+        ))}
+        <Separator />
+      </WrapperText>
+      <WrapperText style={{ marginTop: '4px' }}>
+        {functionalities.map(functionaliti => (
+          <>
+            {functionaliti}
+            <Separator />
+          </>
+        ))}
+        <Separator />
+      </WrapperText>
+    </div>
   );
 };
 
 const Separator = () => (
   <span style={{ color: 'rgba(18,20,23,0.1)', padding: '0 6px' }}>|</span>
 );
-
-DescriptionTextModal.propTypes = {
-  car: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    make: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    model: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rentalPrice: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    rentalCompany: PropTypes.string.isRequired,
-    accessories: PropTypes.array.isRequired,
-    fuelConsumption: PropTypes.string.isRequired,
-    engineSize: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-
-
-Modal.propTypes = {
-  car: PropTypes.shape({
-    make: PropTypes.string.isRequired,
-    img: PropTypes.string,
-    photoLink: PropTypes.string,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
-};
