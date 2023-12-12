@@ -53,6 +53,8 @@ export const LearnMoreButton = styled.button`
   background-color: var(--normal-button-color);
   border-radius: 12px;
   border: none;
+  transition: background-color 0.3s ease;
+  
   &:hover {
     background-color: var(--hover-button-color);
   }

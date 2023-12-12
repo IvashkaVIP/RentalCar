@@ -2,23 +2,21 @@ import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import {
   Overlay,
-  ContainerModal,
-  // DescriptionText,
+  ContainerModal,  
   Description,
   TitleTextBlock,
+  RentalCondition,
+  RentalCarButton,
 } from '../Modal/Modal.styled';
 import {
-  // WrapperCard,
   WrapperIcon,
   WrapperImage,
   StyleImage,
-  // GradientOverlay,
-  // LearnMoreButton,
-  // WrapperMainBlock,
 } from '../CarItem/CarItem.styled';
 import { TitleText } from '../CarItem/TitleText/TitleText';
 import { WrapperText } from '../CarItem/DescriptionText/DescriptionText.styled';
 import { ReactComponent as CloseIcon } from '../Svg/x.svg';
+import { AccentText } from 'components/CarItem/TitleText/TitleText.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -44,28 +42,31 @@ export const Modal = ({ car, closeModal }) => {
   return createPortal(
     <>
       <Overlay onClick={handleBackdropClick}>
-        <ContainerModal>
-          <WrapperIcon offset={'16px'}>
-            <CloseIcon onClick={closeModal} />
-          </WrapperIcon>
-          <WrapperImage height={'248px'}>
-            <StyleImage src={img || photoLink} alt={make} />
-          </WrapperImage>
-          <TitleText car={car} fontSize={'18px'} price={false} />
-          <DescriptionTextList car={car} style={{ marginTop: '8px' }} />
-          <Description style={{ marginTop: '14px' }}>{description}</Description>
+        <ContainerModal>          
+            <WrapperIcon offset={'16px'}>
+              <CloseIcon onClick={closeModal} />
+            </WrapperIcon>
+            <WrapperImage height={'248px'}>
+              <StyleImage src={img || photoLink} alt={make} />
+            </WrapperImage>
+            <TitleText car={car} fontSize={'18px'} price={false} />
+            <DescriptionTextList car={car} style={{ marginTop: '8px' }} />
+            <Description style={{ marginTop: '14px' }}>
+              {description}
+            </Description>
 
-          <TitleTextBlock style={{ marginTop: '24px' }}>
-            Accessories and functionalities:
-          </TitleTextBlock>
-          <SupportingTextList car={car} style={{ marginTop: '8px' }} />
+            <TitleTextBlock style={{ marginTop: '24px' }}>
+              Accessories and functionalities:
+            </TitleTextBlock>
+            <SupportingTextList car={car} style={{ marginTop: '8px' }} />
 
-          <TitleTextBlock style={{ marginTop: '24px' }}>
-            Rental Conditions:
-          </TitleTextBlock>
+            <TitleTextBlock style={{ marginTop: '24px' }}>
+              Rental Conditions:
+            </TitleTextBlock>
 
-          <RentalConditionalList car={car} style={{ marginTop: '8px' }} />
+            <RentalConditionalList car={car} style={{ marginTop: '8px' }} />          
 
+          <RentalCarButton href="tel:+380730000000">Rental car</RentalCarButton>
         </ContainerModal>
       </Overlay>
     </>,
@@ -74,57 +75,50 @@ export const Modal = ({ car, closeModal }) => {
 };
 
 export const RentalConditionalList = ({ car, style }) => {
-  const {
-    rentalPrice,
-    rentalConditions,
-    mileage } = car;
-  
-  
-  console.log(rentalPrice)
-  console.log(rentalConditions);
-  console.log(mileage);
+  const { rentalPrice, rentalConditions, mileage } = car;
 
-  return <>
-  
-  </>
+  const price = rentalPrice.replace('$', '') + `$`;
+  const rentalConditionsArray = rentalConditions
+    .split(`\n`)
+    .filter(item => !item.includes('Minimum age:'));
+  const minAge = rentalConditions.match(/Minimum age: (\d+)/)[1];
 
-}
-
+  return (
+    <>      
+      <div style={{ marginTop: '8px' }}>
+        {minAge && (
+          <RentalCondition style={{ marginRight: '8px' }}>
+            Minimum age: <AccentText>{minAge}</AccentText>
+          </RentalCondition>
+        )}
+        {rentalConditionsArray[0] && (
+          <RentalCondition>{rentalConditionsArray[0]}</RentalCondition>
+        )}
+      </div>
+      <div style={{ marginTop: '8px' }}>
+        {rentalConditionsArray[1] && (
+          <RentalCondition style={{ marginRight: '8px' }}>
+            {rentalConditionsArray[1]}
+          </RentalCondition>
+        )}
+        <RentalCondition style={{ marginRight: '8px' }}>
+          Mileage: <AccentText>{mileage.toLocaleString('en-US')}</AccentText>
+        </RentalCondition>
+        <RentalCondition>
+          Price: <AccentText>{price}</AccentText>
+        </RentalCondition>        
+      </div>
+    </>
+  );
+};
 
 export const DescriptionTextList = ({ car, style }) => {
-  const {
-    id,
-    // make,
-    type,
-    // model,
-    year,
-    // rentalPrice,
-    address,
-    fuelConsumption,
-    // rentalCompany,
-    // accessories,
-    engineSize,
-  } = car;
+  const { id, type, year, address, fuelConsumption, engineSize } = car;
 
   const getCity = () => address.split(`, `)[1];
   const getCountry = () => address.split(`, `)[2];
   const formatingType = () =>
     type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
-  // const getMainAccessories = () => {
-  //   if (
-  //     accessories.find(item =>
-  //       item.toLowerCase().includes('premium sound system')
-  //     )
-  //   )
-  //     return 'Premium Sound System';
-  //   if (accessories.find(item => item.toLowerCase().includes('audio system')))
-  //     return 'Audio System';
-  //   if (accessories.find(item => item.toLowerCase().includes('power liftgate')))
-  //     return 'Power liftgate';
-
-  //   return accessories[0];
-  // };
-  // console.log(getCity())
 
   return (
     <div style={style}>
@@ -138,18 +132,12 @@ export const DescriptionTextList = ({ car, style }) => {
         Year: {year}
         <Separator />
         Type: {formatingType()}
-        {/* {rentalCompany} */}
       </WrapperText>
       <WrapperText style={{ marginTop: '4px' }}>
         Fuel Consumption: {fuelConsumption}
-        {/* {formatingType()} */}
-        {/* <Separator /> */}
-        {/* {model} */}
         <Separator />
         Engine Size: {engineSize}
-        {/* {id} */}
         <Separator />
-        {/* {getMainAccessories()} */}
       </WrapperText>
     </div>
   );
@@ -183,5 +171,5 @@ export const SupportingTextList = ({ car, style }) => {
 };
 
 const Separator = () => (
-  <span style={{ color: 'rgba(18,20,23,0.1)', padding: '0 6px' }}>|</span>
+  <span style={{ color: 'var(--decoration-color)', padding: '0 6px' }}>|</span>
 );

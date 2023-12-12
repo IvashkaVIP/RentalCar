@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Container } from './CarsList.styled';
 import { CarItem } from '../CarItem/CarItem';
@@ -20,7 +19,3 @@ export const CarsList = ({ cars }) => {
   );
 };
 
-
-CarsList.propTypes = {
-  cars: PropTypes.array.isRequired,
-};

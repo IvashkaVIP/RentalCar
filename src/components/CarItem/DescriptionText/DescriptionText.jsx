@@ -62,7 +62,7 @@ export const DescriptionText = ({ car }) => {
 };
 
 const Separator = () => (
-  <span style={{ color: "rgba(18,20,23,0.1)", padding: "0 6px" }}>|</span>
+  <span style={{ color: 'var(--decoration-color)', padding: '0 6px' }}>|</span>
 );
 
 DescriptionText.propTypes = {

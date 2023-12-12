@@ -6,11 +6,13 @@ export const GlobalStyles = createGlobalStyle`
  :root {
     --light-text-color: #ffffff;
     --dark-text-color: #121417;
+    --accessories-text-color: #363535;
     --grey-text-color: #8A8A89;
     --light-grey-text-color: rgba(18,20,23,0.5);
     --accent-text-color: #3470FF;
-    --decoration-color: rgba(18,20,23,0.1)
+    --decoration-color: rgba(18,20,23,0.1);
     --background-color: #ffffff;
+    --background-grey-color: #f9f9f9;
     --normal-button-color: #3470FF;
     --hover-button-color: #0B44CD;
     

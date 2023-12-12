@@ -16,6 +16,7 @@ letter-spacing: 0;
 `;
 
 export const AccentText = styled.span`
+  font-weight: 600;
   color: var(--accent-text-color);
 `;
 

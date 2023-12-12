@@ -15,7 +15,7 @@ export const Overlay = styled.div`
 
 export const ContainerModal = styled.div`
   width: 541px;
-  height: 752px;
+  min-height: 752px;
   background-color: white;
   border-radius: 24px;
   position: relative;
@@ -32,5 +32,34 @@ export const TitleTextBlock = styled.h4`
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  color: #121417;
+  color: var(--dark-text-color);
+`;
+
+export const RentalCondition = styled.div`
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--accessories-text-color);
+  background-color: var(--background-grey-color);
+  border-radius: 35px;
+  padding: 7px 14px;
+`;
+
+export const RentalCarButton = styled.a`
+  background-color: var(--normal-button-color);
+  color: #ffffff; 
+  margin-top: 24px;
+  padding: 12px 50px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration: none;
+  border-radius: 12px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--hover-button-color); /* Цвет фона при наведении */
+  }
 `;
