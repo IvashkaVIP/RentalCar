@@ -1,6 +1,6 @@
 const filtersInitialState = {
-    brand: [],
-    price: [],
+    brand: '',
+    price: null,
     mileage: {from: null, to: null}
 };
 

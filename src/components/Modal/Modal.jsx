@@ -149,18 +149,18 @@ export const SupportingTextList = ({ car, style }) => {
   return (
     <div style={style}>
       <WrapperText>
-        {accessories.map(accessori => (
+        {accessories.map(accessory => (
           <>
-            {accessori}
+            {accessory}
             <Separator />
           </>
         ))}
         <Separator />
       </WrapperText>
       <WrapperText style={{ marginTop: '4px' }}>
-        {functionalities.map(functionaliti => (
+        {functionalities.map(functionality => (
           <>
-            {functionaliti}
+            {functionality}
             <Separator />
           </>
         ))}

@@ -1,4 +1,5 @@
 import { SharedLayout } from './SharedLayout/SharedLayout';
+import { Filters } from './Filters/Filters';
 import { CarsList } from './CarsList/CarsList';
 import { CarItem } from './CarItem/CarItem';
 import { TitleText } from '../components/CarItem/TitleText/TitleText';
@@ -11,6 +12,7 @@ import { NotFound } from './NotFound/NotFound';
 
 export {
   SharedLayout,
+  Filters,
   CarsList,
   CarItem,
   TitleText,

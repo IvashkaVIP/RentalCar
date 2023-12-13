@@ -3,7 +3,7 @@ import { useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { carsSelectors } from 'redux/Cars/carsSelectors';
 import { fetchCars } from '../../redux/Cars/carsOperations';
-import { CarsList, Error, Loader } from '../../components';
+import { Filters, CarsList, Error, Loader } from '../../components';
 import { LoadMoreButton } from '../../components/Button/LoadMore.styled';
 import {WrapperLoadMore} from '../Catalog/Catalog.styled'
 
@@ -39,23 +39,24 @@ export const Catalog = () => {
      }, [cars]);
 
   return (
-    <div ref={containerRef} style={{ paddingBottom: '150px' }}>
+    <main ref={containerRef} style={{ paddingBottom: '150px' }}>
       {isError ? (
         <Error />
       ) : isLoading ? (
         <Loader />
       ) : (
-        <>
+            <>
+          <Filters></Filters>
           <CarsList cars={cars} />
           {!endOfData && (
-            <WrapperLoadMore>
+            // <WrapperLoadMore>
               <LoadMoreButton onClick={handlerLoadMore}>
                 Load more
               </LoadMoreButton>
-            </WrapperLoadMore>
+            // </WrapperLoadMore>
           )}
         </>
       )}
-    </div>
+    </main>
   );
 };
