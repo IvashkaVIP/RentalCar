@@ -1,16 +1,15 @@
-import {useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { carsSelectors } from 'redux/Cars/carsSelectors';
 import { fetchCars } from '../../redux/Cars/carsOperations';
 import { Filters, CarsList, Error, Loader } from '../../components';
-import { LoadMoreButton } from '../../components/Button/LoadMore.styled';
-import {WrapperLoadMore} from '../Catalog/Catalog.styled'
+import { LoadMoreButton } from '../../components/Button/LoadMore';
 
 const limit = 12;
 
 export const Catalog = () => {
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   const cars = useSelector(carsSelectors.getAllCars);
   const isError = useSelector(carsSelectors.getError);
   const isLoading = useSelector(carsSelectors.getLoading);
@@ -18,9 +17,11 @@ export const Catalog = () => {
   const containerRef = useRef(null);
 
   const handlerLoadMore = () => {
+    console.log('LoadMore');
+
     if (!endOfData) {
-      dispatch(fetchCars({ page: cars.length/limit + 1, limit }));
-       }
+      dispatch(fetchCars({ page: cars.length / limit + 1, limit }));
+    }
   };
 
   useEffect(() => {
@@ -28,15 +29,15 @@ export const Catalog = () => {
       dispatch(fetchCars({ page: 1, limit }));
     }
   }, [dispatch, cars]);
-  
-     useLayoutEffect(() => {
-       if (containerRef.current ) {
-         containerRef.current.scrollIntoView({
-           behavior: 'smooth',
-           block: 'end',
-         });
-       }
-     }, [cars]);
+
+  useLayoutEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    }
+  }, [cars]);
 
   return (
     <main ref={containerRef} style={{ paddingBottom: '150px' }}>
@@ -45,16 +46,10 @@ export const Catalog = () => {
       ) : isLoading ? (
         <Loader />
       ) : (
-            <>
+        <>
           <Filters></Filters>
           <CarsList cars={cars} />
-          {!endOfData && (
-            // <WrapperLoadMore>
-              <LoadMoreButton onClick={handlerLoadMore}>
-                Load more
-              </LoadMoreButton>
-            // </WrapperLoadMore>
-          )}
+          {!endOfData && <LoadMoreButton onClick={handlerLoadMore} />}
         </>
       )}
     </main>

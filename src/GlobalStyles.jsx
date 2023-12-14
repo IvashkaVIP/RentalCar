@@ -13,6 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     --decoration-color: rgba(18,20,23,0.1);
     --background-color: #ffffff;
     --background-grey-color: #f9f9f9;
+    --background-second-grey-color: #f7f7fb;
     --normal-button-color: #3470FF;
     --hover-button-color: #0B44CD;
     

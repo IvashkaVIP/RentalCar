@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const LoadMoreButton = styled.button`
+export const WrapperLoadMore = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 100px;
+`;
+
+export const LoadMoreBtn = styled.button`
   width: fit-content;
   height: fit-content;  
   margin-right: auto;

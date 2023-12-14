@@ -60,6 +60,6 @@ export const RentalCarButton = styled.a`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: var(--hover-button-color); /* Цвет фона при наведении */
+    background-color: var(--hover-button-color);
   }
 `;
