@@ -1,13 +1,12 @@
+import { CarBrandInput } from './CarBrandInput';
 import {Container, Form, Label, Input, Button} from './Filters.styled';
 
 export const Filters = () => {
   return (
     <Container>
       <Form name="search_form">
-        <Label width={'224px'}>
-          Car brand
-          <Input type="text" name="carBrand" placeholder="Enter the text" />
-        </Label>
+
+        <CarBrandInput/>
 
         <Label width={'125px'}>
           Price/ 1 hour
@@ -48,27 +47,3 @@ export const Filters = () => {
 
 
 
-// const makes = [
-//   'Buick',
-//   'Volvo',
-//   'HUMMER',
-//   'Subaru',
-//   'Mitsubishi',
-//   'Nissan',
-//   'Lincoln',
-//   'GMC',
-//   'Hyundai',
-//   'MINI',
-//   'Bentley',
-//   'Mercedes-Benz',
-//   'Aston Martin',
-//   'Pontiac',
-//   'Lamborghini',
-//   'Audi',
-//   'BMW',
-//   'Chevrolet',
-//   'Mercedes-Benz',
-//   'Chrysler',
-//   'Kia',
-//   'Land',
-// ];

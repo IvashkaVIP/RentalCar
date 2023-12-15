@@ -9,6 +9,8 @@ export const GlobalStyles = createGlobalStyle`
     --accessories-text-color: #363535;
     --grey-text-color: #8A8A89;
     --light-grey-text-color: rgba(18,20,23,0.5);
+    --middle-light-grey-text-color: rgba(18,20,23,0.2);
+    --super-light-grey-text-color: rgba(18,20,23,0.05);
     --accent-text-color: #3470FF;
     --decoration-color: rgba(18,20,23,0.1);
     --background-color: #ffffff;
