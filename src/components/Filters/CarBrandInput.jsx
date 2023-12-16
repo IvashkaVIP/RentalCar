@@ -1,102 +1,87 @@
-// import React, { useState } from 'react';
-import { Label } from './Filters.styled';
-import { Input, DropDownList } from './CarBrandInput.styled';
+import React, { useState, useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { addBrandFilter } from 'redux/Filters/filtersSlice';
+// import { Label } from './Filters.styled';
+import {
+  ContainerInput,
+  Label,
+  WrapperInputField,
+  Input,
+  DropDownContainer,
+  DropDownList,
+  ItemDropDownList,
+  ToggleChevron,
+} from './CarBrandInput.styled';
+import { ReactComponent as ToggleChevronIcon } from '../Resources/Svg/chevron.svg';
 
+export const ItemInput = ({
+  id,
+  data,
+  width,
+  label,
+  placeholder,
+  handleSelectFilter,
+}) => {
+  const [currentPlaceHolder, setCurrentPlaceHolder] = useState(placeholder);
+  const [isOpen, setIsOpen] = useState(false);
 
-export const CarBrandInput = () => {
-    // const [selectedBrand,setSelectedBrand] = useState('');
+  useEffect(() => {
+    const handleKeyDown = evt => {
+      if (evt.code === 'Escape') setIsOpen(false);
+    };
 
-    // const handleSelectBrand = event => {
-    //   setSelectedBrand(event.target.value);
-    // };
+    const handleMouseDown = evt => {
+      if (!evt.target.closest('.dropdown-container')) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('mousedown', handleMouseDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, []);
+
+  const toggleDropDown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const currentHandlerFilter = choice => {
+    let newState = choice;
+    if (choice === data[0]) {
+      choice = placeholder;
+      newState = "";
+    }
+    handleSelectFilter(newState);
+    setCurrentPlaceHolder(choice);
+  };
 
   return (
-    <div style={{ position: 'relative', marginRight: '18px', width: '224px' }}>
-      <Label width={'100px'}>
-        Car brand
-        <Input type="text" name="carBrand" placeholder="Enter the text" />
-      </Label>
-      <DropDownList>
-        <ul>
-          {makes.map((maker, index) => (
-            <li key={index} value={maker}>
-              {maker}
-            </li>
+    <ContainerInput width={width}>
+      <Label htmlFor={id}>{label}</Label>
+      <WrapperInputField>
+        <Input type="text" id={id} placeholder={currentPlaceHolder} />
+        <ToggleChevron $isOpen={isOpen} onClick={toggleDropDown}>
+          <ToggleChevronIcon width="20px" height="20px" />
+        </ToggleChevron>
+      </WrapperInputField>
+
+      <DropDownContainer className="dropdown-container" $isOpen={isOpen}>
+        <DropDownList>
+          {data.map((item, index) => (
+            <ItemDropDownList
+              key={index}
+              value={item}
+              onClick={() => currentHandlerFilter(item)}
+            >
+              {item}
+            </ItemDropDownList>
           ))}
-        </ul>
-      </DropDownList>
-    </div>
+        </DropDownList>
+      </DropDownContainer>
+    </ContainerInput>
   );
 };
-
-const makes = [
-  'Buick',
-  'Volvo',
-  'HUMMER',
-  'Subaru',
-  'Mitsubishi',
-  'Nissan',
-  'Lincoln',
-  'GMC',
-  'Hyundai',
-  'MINI',
-  'Bentley',
-  'Mercedes-Benz',
-  'Aston Martin',
-  'Pontiac',
-  'Lamborghini',
-  'Audi',
-  'BMW',
-  'Chevrolet',
-  'Mercedes-Benz',
-  'Chrysler',
-  'Kia',
-  'Land',
-];
-
-
-//<>
-//  <Label width={'224px'}>
-//    Car brand
-//    <Input type="text" name="carBrand" placeholder="Enter the text" />
-//  </Label>
-//</>;
-
-
-// import React, { useState } from 'react';
-// import { Label } from './Filters.styled';
-// import { Select, Option } from './CarBrandInput.styled';
-
-// export const CarBrandInput = () => {
-//   const [selectedBrand, setSelectedBrand] = useState('');
-
-//   const handleSelectBrand = event => {
-//     setSelectedBrand(event.target.value);
-//   };
-
-//   return (
-//     <>
-//       <Label width={'224px'}>
-//         Car brand
-//         <Select
-//           type="text"
-//           name="carBrand"
-//           list="carMakes"
-//           //   placeholder="Enter the text"
-//           value={selectedBrand}
-//           onChange={handleSelectBrand}
-//         >
-//           <Option value="" disabled hidden>
-//             Enter the text
-//           </Option>
-//           <Option value=""></Option>
-//           {makes.map((maker, index) => (
-//             <option key={index} value={maker}>
-//               {maker}
-//             </option>
-//           ))}
-//         </Select>
-//       </Label>
-//     </>
-//   );
-// };

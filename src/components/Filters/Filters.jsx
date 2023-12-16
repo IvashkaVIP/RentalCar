@@ -1,14 +1,34 @@
-import { CarBrandInput } from './CarBrandInput';
-import {Container, Form, Label, Input, Button} from './Filters.styled';
+import { useDispatch } from 'react-redux';
+import {
+  addBrandFilter,
+  // addPriceFilter,
+  // addMileageFilter
+} from 'redux/Filters/filtersSlice';
+import { ItemInput } from './CarBrandInput';
+import {
+  Container, Form,
+  // Label, Input, Button
+} from './Filters.styled';
+import{ makes } from "../Resources/Data/makes"
 
 export const Filters = () => {
+  const dispatch = useDispatch();
+
+
+
   return (
     <Container>
       <Form name="search_form">
+        <ItemInput
+          id="carBrand"
+          data={makes}
+          width="224px"
+          label="Car brand"
+          placeholder="Enter the text"
+          handleSelectFilter={(choice)=>dispatch(addBrandFilter(choice))}                      
+        />
 
-        <CarBrandInput/>
-
-        <Label width={'125px'}>
+        {/* <Label width={'125px'}>
           Price/ 1 hour
           <Input type="text" name="pricePerHour" placeholder="To $" />
         </Label>
@@ -38,7 +58,7 @@ export const Filters = () => {
           </div>
         </Label>
 
-        <Button type="submit">Search</Button>
+        <Button type="submit">Search</Button> */}
       </Form>
     </Container>
   );

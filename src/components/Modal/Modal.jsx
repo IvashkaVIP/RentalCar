@@ -15,8 +15,8 @@ import {
 } from '../CarItem/CarItem.styled';
 import { TitleText } from '../CarItem/TitleText/TitleText';
 import { WrapperText } from '../CarItem/DescriptionText/DescriptionText.styled';
-import { ReactComponent as CloseIcon } from '../Svg/x.svg';
 import { AccentText } from 'components/CarItem/TitleText/TitleText.styled';
+import { ReactComponent as CloseIcon } from '../Resources/Svg/x.svg';
 
 const modalRoot = document.querySelector('#modal-root');
 

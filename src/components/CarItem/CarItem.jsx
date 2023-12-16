@@ -15,8 +15,8 @@ import {
   WrapperMainBlock,
 } from './CarItem.styled';
 import { TitleText, DescriptionText } from '../../components';
-import { ReactComponent as NormalHeartIcon } from '../Svg/normalHeart.svg';
-import { ReactComponent as FavoriteHeartIcon } from '../Svg/activeHeart.svg';
+import { ReactComponent as NormalHeartIcon } from '../Resources/Svg/normalHeart.svg';
+import { ReactComponent as FavoriteHeartIcon } from '../Resources/Svg/activeHeart.svg';
 
 export const CarItem = ({ car, openModal }) => {
   const { _id, make, img, photoLink } = car;  
