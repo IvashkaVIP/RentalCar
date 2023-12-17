@@ -11,7 +11,7 @@ import {
   DropDownList,
   ItemDropDownList,
   ToggleChevron,
-} from './CarBrandInput.styled';
+} from './ItemInput.styled';
 import { ReactComponent as ToggleChevronIcon } from '../Resources/Svg/chevron.svg';
 
 export const ItemInput = ({
@@ -26,6 +26,9 @@ export const ItemInput = ({
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    
+
+    
     const handleKeyDown = evt => {
       if (evt.code === 'Escape') setIsOpen(false);
     };
@@ -49,13 +52,13 @@ export const ItemInput = ({
     setIsOpen(!isOpen);
   };
 
-  const currentHandlerFilter = choice => {
-    let newState = choice;
+  const currentHandleFilter = choice => {
+    let newChoice = choice;
     if (choice === data[0]) {
       choice = placeholder;
-      newState = '';
+      newChoice = '';
     }
-    handleSelectFilter(newState);
+    handleSelectFilter(newChoice);
     setCurrentPlaceHolder(choice);
     setIsOpen(false);
   };
@@ -64,7 +67,10 @@ export const ItemInput = ({
     <ContainerInput width={width}>
       <Label htmlFor={id}>{label}</Label>
       <WrapperInputField>
-        <Input type="text" id={id} placeholder={currentPlaceHolder} />
+        <Input
+          type="text"
+          id={id}
+          placeholder={currentPlaceHolder} />
         <ToggleChevron $isOpen={isOpen} onClick={toggleDropDown}>
           <ToggleChevronIcon width="20px" height="20px" />
         </ToggleChevron>
@@ -76,7 +82,7 @@ export const ItemInput = ({
             <ItemDropDownList
               key={index}
               value={item}
-              onClick={() => currentHandlerFilter(item)}
+              onClick={() => currentHandleFilter(item)}
             >
               {item}
             </ItemDropDownList>

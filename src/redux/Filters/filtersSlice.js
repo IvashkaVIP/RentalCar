@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { fetchCars } from '../Cars/carsOperations';
-
 
 const filtersInitialState = {
   brand: '',

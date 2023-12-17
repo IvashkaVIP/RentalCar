@@ -6,7 +6,7 @@ export const Favorites = () => {
   const allCars = useSelector(carsSelectors.getAllCars);
   const favoriteCarsId = useSelector(carsSelectors.getFavoriteCarsId);
   const favoriteCars = allCars.filter(item =>
-    favoriteCarsId.includes(item._id)
+    favoriteCarsId.includes(item.id)
   );
   return (
     <main>

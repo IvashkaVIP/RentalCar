@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   /* justify-content: space-between; */
-  /* align-items: end; */
+  align-items: end;
   background-color: aqua;  
   /* max-width: 859px; */
 `;

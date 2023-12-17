@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCars } from '../Cars/carsOperations';
-import { nanoid } from 'nanoid';
 
 const carsInitialState = {
   allCars: [],
@@ -23,27 +22,28 @@ const carsSlice = createSlice({
       );
     },
   },
-  extraReducers: {
-    [fetchCars.pending](state) {
-      state.isLoading = true;
-    },
-    [fetchCars.fulfilled](state, action) {
-      state.isLoading = false;
-      state.isError = null;
+  extraReducers: builder => {
+    builder
+      .addCase(fetchCars.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(fetchCars.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = null;
 
-      const newCars = action.payload.map(car => ({ _id: nanoid(), ...car }));
-      state.allCars = [...state.allCars, ...newCars];
+        const newCars = action.payload;
+        state.allCars = [...state.allCars, ...newCars];
 
-      if (newCars.length < action.meta.arg.limit) {
-        state.endOfData = true;
-      } else {
-        state.endOfData = false;
-      }
-    },
-    [fetchCars.rejected](state, action) {
-      state.isLoading = false;
-      state.isError = action.payload;
-    },
+        if (newCars.length < action.meta.arg.limit) {
+          state.endOfData = true;
+        } else {
+          state.endOfData = false;
+        }
+      })
+      .addCase(fetchCars.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      });
   },
 });
 

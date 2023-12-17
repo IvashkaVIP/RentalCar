@@ -16,7 +16,7 @@ export const carsReducer = createReducer(carsInitialState, {
 
   [deleteFavoriteCar]: (state, action) => {
     const index = state.favoriteCarsId.findIndex(
-      car => car._id === action.payload
+      car => car.id === action.payload
     );
     state.favoriteCarsId.splice(index, 1);
   },

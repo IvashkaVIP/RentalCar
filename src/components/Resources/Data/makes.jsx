@@ -23,3 +23,13 @@ export const makes = [
   'Kia',
   'Land',
 ];
+
+ const pricesArray = () => {
+   let res = ["---All prices---"];
+   for (let i = 10; i <= 200; i += 10) {
+     res.push(i);
+   }
+   return res;
+};
+ 
+export const prices = pricesArray();

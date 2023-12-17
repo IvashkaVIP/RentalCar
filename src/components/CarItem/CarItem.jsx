@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { carsSelectors } from 'redux/Cars/carsSelectors';
 import {
@@ -19,18 +18,18 @@ import { ReactComponent as NormalHeartIcon } from '../Resources/Svg/normalHeart.
 import { ReactComponent as FavoriteHeartIcon } from '../Resources/Svg/activeHeart.svg';
 
 export const CarItem = ({ car, openModal }) => {
-  const { _id, make, img, photoLink } = car;  
+  const { id, make, img, photoLink } = car;  
   const favoriteCarsId = useSelector(carsSelectors.getFavoriteCarsId);
     const dispatch = useDispatch();
-    const isFavoriteCar = () => favoriteCarsId.includes(_id);
+    const isFavoriteCar = () => favoriteCarsId.includes(id);
   const toggleHeart = () => {
     if (isFavoriteCar()) {    
-      dispatch(deleteFavoriteCar(_id));
+      dispatch(deleteFavoriteCar(id));
     } else {
-      dispatch(addFavoriteCar(_id));
+      dispatch(addFavoriteCar(id));
     }
   };
-  const onClickLearnMore = () => openModal(_id);
+  const onClickLearnMore = () => openModal(id);
 
   return (
     <WrapperCard>
@@ -54,11 +53,3 @@ export const CarItem = ({ car, openModal }) => {
   );
 };
 
-CarItem.propTypes = {
-  car: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    make: PropTypes.string.isRequired,
-    img: PropTypes.string,
-    photoLink: PropTypes.string,
-  }).isRequired,
-};

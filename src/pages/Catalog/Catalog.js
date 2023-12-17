@@ -1,22 +1,34 @@
-import { useEffect, useRef } from 'react';
-import { useLayoutEffect } from 'react';
+import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { carsSelectors } from 'redux/Cars/carsSelectors';
 import { filtersSelectors } from 'redux/Filters/filtersSelectors';
 import { fetchCars } from '../../redux/Cars/carsOperations';
 import { Filters, CarsList, Error, Loader } from '../../components';
 import { LoadMoreButton } from '../../components/Button/LoadMore';
+import { addBrandFilter } from 'redux/Filters/filtersSlice';
 
 const limit = 12;
 
 export const Catalog = () => {
+  const [visibleCars, setVisibleCars] = useState([]);
   const dispatch = useDispatch();
   const cars = useSelector(carsSelectors.getAllCars);
-  const filters = useSelector( filtersSelectors.getAllFilters);
+  const filters = useSelector(filtersSelectors.getAllFilters);
   const isError = useSelector(carsSelectors.getError);
   const isLoading = useSelector(carsSelectors.getLoading);
   const endOfData = useSelector(carsSelectors.getEndOfData);
   const containerRef = useRef(null);
+  const {
+    brand,
+    // price,
+    // mileage: { from, to },
+  } = filters;
+ 
+
+  const handleClickSearch = (choice) => {
+
+    dispatch(addBrandFilter(choice))
+  }
 
   const handlerLoadMore = () => {
     if (!endOfData) {
@@ -30,6 +42,17 @@ export const Catalog = () => {
     }
   }, [dispatch, cars]);
 
+  useEffect(() => {
+    if (brand) {
+      setVisibleCars(
+        cars.filter(
+          car => car.make.trim().toLowerCase() === brand.trim().toLowerCase()
+        )
+      );
+    } else setVisibleCars(cars);
+    
+  }, [brand, cars]);
+
   useLayoutEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollIntoView({
@@ -39,12 +62,6 @@ export const Catalog = () => {
     }
   }, [cars]);
 
-if (filters.brand) {
-  const visibleCars = cars.filter(
-    car => car.make.trim().toLowerCase() === filters.brand.trim().toLowerCase()
-  );
-  console.log(visibleCars);
-}
   return (
     <main ref={containerRef} style={{ paddingBottom: '150px' }}>
       {isError ? (
@@ -53,8 +70,8 @@ if (filters.brand) {
         <Loader />
       ) : (
         <>
-          <Filters/>
-          <CarsList cars={cars} />
+          <Filters handleClickSearch={handleClickSearch} />
+          {visibleCars && <CarsList cars={visibleCars} />}
           {!endOfData && <LoadMoreButton onClick={handlerLoadMore} />}
         </>
       )}

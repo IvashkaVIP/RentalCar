@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import {
   Overlay,
   ContainerModal,  
@@ -149,20 +149,20 @@ export const SupportingTextList = ({ car, style }) => {
   return (
     <div style={style}>
       <WrapperText>
-        {accessories.map(accessory => (
-          <>
+        {accessories.map((accessory, index) => (
+          <Fragment key={index}>
             {accessory}
             <Separator />
-          </>
+          </Fragment>
         ))}
         <Separator />
       </WrapperText>
       <WrapperText style={{ marginTop: '4px' }}>
-        {functionalities.map(functionality => (
-          <>
+        {functionalities.map((functionality, index) => (
+          <Fragment key={index}>
             {functionality}
             <Separator />
-          </>
+          </Fragment>
         ))}
         <Separator />
       </WrapperText>
