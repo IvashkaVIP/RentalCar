@@ -53,10 +53,11 @@ export const ItemInput = ({
     let newState = choice;
     if (choice === data[0]) {
       choice = placeholder;
-      newState = "";
+      newState = '';
     }
     handleSelectFilter(newState);
     setCurrentPlaceHolder(choice);
+    setIsOpen(false);
   };
 
   return (
