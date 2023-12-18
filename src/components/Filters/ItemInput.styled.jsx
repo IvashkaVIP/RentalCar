@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const ContainerInput = styled.div`
-  background-color: #ff9306;
-  /* display: flex; */
-
   position: relative;
   margin-right: 18px;
   width: ${props => props.width};
@@ -22,8 +19,7 @@ export const Label = styled.label`
 `;
 
 export const WrapperInputField = styled.div`
-  position: relative;
-  background-color: brown;
+  position: relative;  
 `;
 
 export const Input = styled.input`

@@ -5,7 +5,7 @@ import { filtersSelectors } from 'redux/Filters/filtersSelectors';
 import { fetchCars } from '../../redux/Cars/carsOperations';
 import { Filters, CarsList, Error, Loader } from '../../components';
 import { LoadMoreButton } from '../../components/Button/LoadMore';
-import { addBrandFilter } from 'redux/Filters/filtersSlice';
+import { addBrandFilter, addPriceFilter } from 'redux/Filters/filtersSlice';
 
 const limit = 12;
 
@@ -20,17 +20,17 @@ export const Catalog = () => {
   const containerRef = useRef(null);
   const {
     brand,
-    // price,
-    // mileage: { from, to },
+    price,
+    mileage: { from, to },
   } = filters;
- 
 
-  const handleClickSearch = (choice) => {
+  const handleClickSearchButton = ({ selectBrand, selectPrice }) => {
+    dispatch(addBrandFilter(selectBrand));
+    dispatch(addPriceFilter(selectPrice));
+  };
 
-    dispatch(addBrandFilter(choice))
-  }
-
-  const handlerLoadMore = () => {
+  const handlerLoadMore = event => {
+    event.preventDefault();
     if (!endOfData) {
       dispatch(fetchCars({ page: cars.length / limit + 1, limit }));
     }
@@ -43,15 +43,39 @@ export const Catalog = () => {
   }, [dispatch, cars]);
 
   useEffect(() => {
-    if (brand) {
-      setVisibleCars(
-        cars.filter(
+    if (!brand && !price && !from && !to) {
+      setVisibleCars(cars);
+    } else {
+      let filteredCars = [...cars];
+
+      if (brand)
+        filteredCars = filteredCars.filter(
           car => car.make.trim().toLowerCase() === brand.trim().toLowerCase()
-        )
-      );
-    } else setVisibleCars(cars);
-    
-  }, [brand, cars]);
+        );
+
+      if (price)
+        filteredCars = filteredCars.filter(
+          car => parseInt(car.rentalPrice.replace('$', ''), 10) <= price
+        );
+
+      if (from || to)
+        filteredCars = filteredCars.filter(
+          car => from <= car.mileage && (car.mileage >= to || !to)
+        );
+
+      setVisibleCars(filteredCars);
+    }
+  }, [brand, price, from, to, cars]);
+
+  // useEffect(() => {
+  //   if (brand) {
+  //     setVisibleCars(
+  //       cars.filter(
+  //         car => car.make.trim().toLowerCase() === brand.trim().toLowerCase()
+  //       )
+  //     );
+  //   } else setVisibleCars(cars);
+  // }, [brand, cars]);
 
   useLayoutEffect(() => {
     if (containerRef.current) {
@@ -70,7 +94,7 @@ export const Catalog = () => {
         <Loader />
       ) : (
         <>
-          <Filters handleClickSearch={handleClickSearch} />
+          <Filters handleClickSearchButton={handleClickSearchButton} />
           {visibleCars && <CarsList cars={visibleCars} />}
           {!endOfData && <LoadMoreButton onClick={handlerLoadMore} />}
         </>

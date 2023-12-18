@@ -21,14 +21,13 @@ export const ItemInput = ({
   label,
   placeholder,
   handleSelectFilter,
+  store,
 }) => {
   const [currentPlaceHolder, setCurrentPlaceHolder] = useState(placeholder);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    
 
-    
     const handleKeyDown = evt => {
       if (evt.code === 'Escape') setIsOpen(false);
     };
@@ -55,22 +54,25 @@ export const ItemInput = ({
   const currentHandleFilter = choice => {
     let newChoice = choice;
     if (choice === data[0]) {
-      choice = placeholder;
       newChoice = '';
+      setCurrentPlaceHolder(placeholder);
+    } else {
+      setCurrentPlaceHolder(handleSelectFilter.viewPlaceholder(choice));
     }
-    handleSelectFilter(newChoice);
-    setCurrentPlaceHolder(choice);
+    handleSelectFilter.settingChoice(newChoice);
     setIsOpen(false);
   };
+
+  // console.log("ItemInput 1 >>>   CurrentPlaceHolder : ", currentPlaceHolder)
+  // console.log('ItemInput 2 >>>   Store : ', handleSelectFilter.store);    
+
+  // if(handleSelectFilter.store) setCurrentPlaceHolder(handleSelectFilter.store);
 
   return (
     <ContainerInput width={width}>
       <Label htmlFor={id}>{label}</Label>
       <WrapperInputField>
-        <Input
-          type="text"
-          id={id}
-          placeholder={currentPlaceHolder} />
+        <Input type="text" id={id} placeholder={currentPlaceHolder} />
         <ToggleChevron $isOpen={isOpen} onClick={toggleDropDown}>
           <ToggleChevronIcon width="20px" height="20px" />
         </ToggleChevron>

@@ -1,7 +1,7 @@
-import {
-  // useSelector,
-  // useDispatch
-} from 'react-redux';
+// import {
+//   useSelector,
+//   // useDispatch
+// } from 'react-redux';
 // import { filtersSelectors } from 'redux/Filters/filtersSelectors';
 // import {
 //   // addBrandFilter,
@@ -13,24 +13,29 @@ import {
   Container,
   Form,
   Button,
-  // Label, Input,
+  Label, Input,
 } from './Filters.styled';
 import { makes, prices } from '../Resources/Data/makes';
-import { useState } from 'react';
+import {
+  // useEffect,
+  useState
+} from 'react';
 
-export const Filters = ({ handleClickSearch }) => {
-  // const dispatch = useDispatch();
+export const Filters = ({ handleClickSearchButton }) => {
+  // const dispatch = useDispatch();  
   // const filters = useSelector(filtersSelectors.getAllFilters);
   // const {
   //   // brand,
   //   // price,
   //   // mileage: { from, to },
   // } = filters;
-  
+
   const [selectBrand, setSelectBrand] = useState('');
-  // const [selectPrice, setSelectPrice] = useState('');
+  const [selectPrice, setSelectPrice] = useState('');
   // const [selectMileageFrom, setSelectMileageFrom] = useState('');
   // const [selectMileageTo, setSelectMileageTo] = useState('');
+
+  // console.log("Filter 1 >>>>>   Brand : ",brand)  // dev
 
   return (
     <Container>
@@ -40,8 +45,12 @@ export const Filters = ({ handleClickSearch }) => {
           data={makes}
           width="224px"
           label="Car brand"
+          // placeholder={brand ? brand : 'Enter the text'}
           placeholder="Enter the text"
-          handleSelectFilter={choice => setSelectBrand(choice)}
+          handleSelectFilter={{
+            settingChoice: choice => { console.log("callback 1 >>> choice: ", choice); setSelectBrand(choice)},
+            viewPlaceholder: choice => choice
+          }}
         />
 
         <ItemInput
@@ -50,11 +59,13 @@ export const Filters = ({ handleClickSearch }) => {
           width="125px"
           label="Price/ 1 hour"
           placeholder="To $"
-          // handleSelectFilter={choice => setSelectPrice(choice)}
+          handleSelectFilter={{
+            settingChoice: choice => setSelectPrice(choice),
+            viewPlaceholder: choice => (`To ${choice}$`),            
+          }}
         />
 
         
-{/*
         <Label width={'320px'}>
           Car mileage/ km
           <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
@@ -78,9 +89,12 @@ export const Filters = ({ handleClickSearch }) => {
               }}
             />
           </div>
-        </Label> */}
+        </Label>
 
-        <Button type="submit" onClick={() => handleClickSearch(selectBrand)}>
+        <Button
+          type="submit"
+          onClick={() => handleClickSearchButton({ selectBrand, selectPrice })}
+        >
           Search
         </Button>
       </Form>
