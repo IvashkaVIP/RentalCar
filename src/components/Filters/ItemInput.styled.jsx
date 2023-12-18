@@ -28,7 +28,7 @@ export const Input = styled.input`
   padding-left: 18px;
   border-radius: 14px;
   border: none;
-  background-color: var(--background-second-grey-color);
+  background-color: var(--background-second-grey-color);  
   &::placeholder {
     font-family: 'Manrope', sans-serif;
     font-size: 18px;

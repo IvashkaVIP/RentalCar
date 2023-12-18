@@ -10,17 +10,14 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState: filtersInitialState,
   reducers: {
-    addBrandFilter(state, action) {
-      state.brand = action.payload;
-    },
-    addPriceFilter(state, action) {
-      state.price = action.payload;
-    },
-    addMilageFilter(state, action) {
-      state.mileage = action.payload;
+    addFilters(state, action) {
+      const { brand, price, mileage } = action.payload;
+      state.brand = brand;
+      state.price = price;
+      state.mileage = mileage;
     },
   },
 });
 
-export const { addBrandFilter, addPriceFilter, addMileageFilter } = filtersSlice.actions;
+export const { addFilters } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

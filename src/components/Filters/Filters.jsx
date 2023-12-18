@@ -1,18 +1,16 @@
-// import {
-//   useSelector,
-//   // useDispatch
-// } from 'react-redux';
+import {
+  // useSelector,
+  useDispatch
+} from 'react-redux';
 // import { filtersSelectors } from 'redux/Filters/filtersSelectors';
-// import {
-//   // addBrandFilter,
-//   // addPriceFilter,
-//   // addMileageFilter
-// } from 'redux/Filters/filtersSlice';
+import {addFilters} from 'redux/Filters/filtersSlice';
 import { ItemInput } from './ItemInput';
 import {
   Container,
   Form,
   Button,
+  WrapperInput,
+  TextBeforeInput,
   Label, Input,
 } from './Filters.styled';
 import { makes, prices } from '../Resources/Data/makes';
@@ -21,8 +19,9 @@ import {
   useState
 } from 'react';
 
-export const Filters = ({ handleClickSearchButton }) => {
-  // const dispatch = useDispatch();  
+ 
+export const Filters = () => {
+  const dispatch = useDispatch();  
   // const filters = useSelector(filtersSelectors.getAllFilters);
   // const {
   //   // brand,
@@ -30,10 +29,30 @@ export const Filters = ({ handleClickSearchButton }) => {
   //   // mileage: { from, to },
   // } = filters;
 
-  const [selectBrand, setSelectBrand] = useState('');
-  const [selectPrice, setSelectPrice] = useState('');
-  // const [selectMileageFrom, setSelectMileageFrom] = useState('');
-  // const [selectMileageTo, setSelectMileageTo] = useState('');
+  const [selectingBrand, setSelectingBrand] = useState('');
+  const [selectingPrice, setSelectingPrice] = useState('');
+  const [selectingMileage, setSelectingMileage] = useState({From : '', To: ''});
+  
+const handleClickSearchButton = () => {
+  dispatch(
+    addFilters({
+      brand: selectingBrand,
+      price: selectingPrice,
+      mileage: {
+        from: parseFloat((selectingMileage.From).replace(/,/g, '')),
+        to: parseFloat((selectingMileage.To).replace(/,/g, '')),
+      },
+    })
+  );
+};
+  
+  const handleMileageChange = e => {    
+    let { name, value } = e.target;        
+    value = value.replace(/\D/g, '');    
+    value =
+      value === '' ? '' : new Intl.NumberFormat('en-US').format(Number(value));
+    setSelectingMileage((prevState=>({...prevState, [name]: value})));
+  };
 
   // console.log("Filter 1 >>>>>   Brand : ",brand)  // dev
 
@@ -48,8 +67,11 @@ export const Filters = ({ handleClickSearchButton }) => {
           // placeholder={brand ? brand : 'Enter the text'}
           placeholder="Enter the text"
           handleSelectFilter={{
-            settingChoice: choice => { console.log("callback 1 >>> choice: ", choice); setSelectBrand(choice)},
-            viewPlaceholder: choice => choice
+            settingChoice: choice => {
+              console.log('callback 1 >>> choice: ', choice);
+              setSelectingBrand(choice);
+            },
+            viewPlaceholder: choice => choice,
           }}
         />
 
@@ -58,42 +80,53 @@ export const Filters = ({ handleClickSearchButton }) => {
           data={prices}
           width="125px"
           label="Price/ 1 hour"
-          placeholder="To $"
+          placeholder="To  $"
           handleSelectFilter={{
-            settingChoice: choice => setSelectPrice(choice),
-            viewPlaceholder: choice => (`To ${choice}$`),            
+            settingChoice: choice => setSelectingPrice(choice),
+            viewPlaceholder: choice => `To  ${choice}$`,
           }}
         />
 
-        
-        <Label width={'320px'}>
+        <Label>
           Car mileage/ km
           <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
-            <Input
-              type="text"
-              name="carMileageFrom"
-              placeholder="From"
-              style={{
-                borderBottomRightRadius: 0,
-                borderTopRightRadius: 0,
-                borderRight: '1px solid rgba(138, 138, 137, 0.2)',
-              }}
-            />
-            <Input
-              type="text"
-              name="carMileageTo"
-              placeholder="To"
-              style={{
-                borderBottomLeftRadius: 0,
-                borderTopLeftRadius: 0,
-              }}
-            />
+            <WrapperInput>
+              <TextBeforeInput>From</TextBeforeInput>
+              <Input
+                type="text"
+                name="From"
+                value={selectingMileage.From}
+                onChange={handleMileageChange}
+                // placeholder="From"
+                style={{
+                  paddingLeft: '70px',
+                  borderBottomRightRadius: 0,
+                  borderTopRightRadius: 0,
+                  borderRight: '1px solid rgba(138, 138, 137, 0.2)',
+                }}
+              />
+            </WrapperInput>
+            <WrapperInput>
+              <TextBeforeInput>To</TextBeforeInput>
+              <Input
+                type="text"
+                name="To"
+                value={selectingMileage.To}
+                onChange={handleMileageChange}
+                // placeholder="To"
+                style={{
+                  paddingLeft: '45px',
+                  borderBottomLeftRadius: 0,
+                  borderTopLeftRadius: 0,
+                }}
+              />
+            </WrapperInput>
           </div>
         </Label>
 
         <Button
           type="submit"
-          onClick={() => handleClickSearchButton({ selectBrand, selectPrice })}
+          onClick={() => handleClickSearchButton()}
         >
           Search
         </Button>

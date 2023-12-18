@@ -5,7 +5,6 @@ import { filtersSelectors } from 'redux/Filters/filtersSelectors';
 import { fetchCars } from '../../redux/Cars/carsOperations';
 import { Filters, CarsList, Error, Loader } from '../../components';
 import { LoadMoreButton } from '../../components/Button/LoadMore';
-import { addBrandFilter, addPriceFilter } from 'redux/Filters/filtersSlice';
 
 const limit = 12;
 
@@ -23,11 +22,6 @@ export const Catalog = () => {
     price,
     mileage: { from, to },
   } = filters;
-
-  const handleClickSearchButton = ({ selectBrand, selectPrice }) => {
-    dispatch(addBrandFilter(selectBrand));
-    dispatch(addPriceFilter(selectPrice));
-  };
 
   const handlerLoadMore = event => {
     event.preventDefault();
@@ -58,24 +52,15 @@ export const Catalog = () => {
           car => parseInt(car.rentalPrice.replace('$', ''), 10) <= price
         );
 
-      if (from || to)
+      if (from || to) {
         filteredCars = filteredCars.filter(
-          car => from <= car.mileage && (car.mileage >= to || !to)
+          car => from <= car.mileage && (car.mileage <= to || !to)
         );
+      }
 
       setVisibleCars(filteredCars);
     }
   }, [brand, price, from, to, cars]);
-
-  // useEffect(() => {
-  //   if (brand) {
-  //     setVisibleCars(
-  //       cars.filter(
-  //         car => car.make.trim().toLowerCase() === brand.trim().toLowerCase()
-  //       )
-  //     );
-  //   } else setVisibleCars(cars);
-  // }, [brand, cars]);
 
   useLayoutEffect(() => {
     if (containerRef.current) {
@@ -94,7 +79,7 @@ export const Catalog = () => {
         <Loader />
       ) : (
         <>
-          <Filters handleClickSearchButton={handleClickSearchButton} />
+          <Filters />
           {visibleCars && <CarsList cars={visibleCars} />}
           {!endOfData && <LoadMoreButton onClick={handlerLoadMore} />}
         </>

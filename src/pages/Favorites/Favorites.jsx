@@ -9,7 +9,7 @@ export const Favorites = () => {
     favoriteCarsId.includes(item.id)
   );
   return (
-    <main>
+    <main style={{paddingTop: "50px"}}>
       {!favoriteCarsId.length ? (
         <NoFavorites />
       ) : (

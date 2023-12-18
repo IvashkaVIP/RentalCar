@@ -72,7 +72,7 @@ export const ItemInput = ({
     <ContainerInput width={width}>
       <Label htmlFor={id}>{label}</Label>
       <WrapperInputField>
-        <Input type="text" id={id} placeholder={currentPlaceHolder} />
+        <Input type="text" id={id} placeholder={currentPlaceHolder} disabled />
         <ToggleChevron $isOpen={isOpen} onClick={toggleDropDown}>
           <ToggleChevronIcon width="20px" height="20px" />
         </ToggleChevron>
