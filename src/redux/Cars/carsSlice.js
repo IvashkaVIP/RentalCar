@@ -20,7 +20,7 @@ const carsSlice = createSlice({
       state.favoriteCarsId = state.favoriteCarsId.filter(
         carId => carId !== action.payload
       );
-    },
+    },     
   },
   extraReducers: builder => {
     builder
