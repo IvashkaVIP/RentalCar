@@ -1,23 +1,23 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;  
+  display: flex;
   justify-content: center;
-  margin-top: 20px;;
-  margin-bottom: 50px;      
+  margin-top: 20px;
+  margin-bottom: 50px;
 `;
 
 export const Form = styled.form`
-  display: flex;  
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: end;
   row-gap: 10px;
 `;
 
-export const Label = styled.label`    
+export const Label = styled.label`
   width: 320px;
-  position: relative;    
+  position: relative;
   margin-right: 18px;
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
@@ -26,37 +26,38 @@ export const Label = styled.label`
   color: var(--grey-text-color);
 `;
 
-export const WrapperInput = styled.div`
-position: relative;
-margin-top: 8px;
+export const DoubleInput = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`;
 
+export const WrapperInput = styled.div`
+  position: relative;
+  margin-top: 8px;
 `;
 
 export const TextBeforeInput = styled.span`
-    position: absolute;
-    left: 18px;
-    top: 14.5px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 20px;
-    color: var(--dark-text-color);
-    
-
+  position: absolute;
+  left: 18px;
+  top: 14.5px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--dark-text-color);
 `;
 
-
-export const Input = styled.input`  
+export const Input = styled.input`
   width: 100%;
-  height: 48px;  
+  height: 48px;
   border-radius: 14px;
   border: none;
   background-color: var(--background-second-grey-color);
   font-family: 'Manrope', sans-serif;
   font-size: 18px;
   font-weight: 500;
-  line-height: 20px;  
-  
+  line-height: 20px;
+
   &:focus {
     outline: none;
   }

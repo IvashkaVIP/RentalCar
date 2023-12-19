@@ -5,9 +5,9 @@ const getLoading = state => state.cars.isLoading;
 const getEndOfData = state => state.cars.endOfData;
 
 export const carsSelectors = {
-    getAllCars,
-    getFavoriteCarsId,
-    getError,
-    getLoading,
-    getEndOfData
-}
+  getAllCars,
+  getFavoriteCarsId,
+  getError,
+  getLoading,
+  getEndOfData,
+};

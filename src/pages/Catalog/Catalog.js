@@ -10,6 +10,8 @@ const limit = 12;
 
 export const Catalog = () => {
   const [visibleCars, setVisibleCars] = useState([]);
+  const [toFetch, setToFetch] = useState(false);
+
   const dispatch = useDispatch();
   const cars = useSelector(carsSelectors.getAllCars);
   const filters = useSelector(filtersSelectors.getAllFilters);
@@ -23,18 +25,20 @@ export const Catalog = () => {
     mileage: { from, to },
   } = filters;
 
-  const handlerLoadMore = event => {
-    event.preventDefault();
-    if (!endOfData) {
-      dispatch(fetchCars({ page: cars.length / limit + 1, limit }));
-    }
+  const handleLoadMore = () => {
+    setToFetch(true);
   };
 
   useEffect(() => {
-    if (!cars.length) {
-      dispatch(fetchCars({ page: 1, limit }));
+    if (!cars.length) dispatch(fetchCars({ page: 1, limit }));
+  }, [cars.length, dispatch]);
+
+  useEffect(() => {
+    if (toFetch) {
+      dispatch(fetchCars({ page: cars.length / limit + 1, limit }));
+      setToFetch(false);
     }
-  }, [dispatch, cars]);
+  }, [cars.length, dispatch, toFetch]);
 
   useEffect(() => {
     if (!brand && !price && !from && !to) {
@@ -71,6 +75,8 @@ export const Catalog = () => {
     }
   }, [cars]);
 
+  const isOffFilters = () => !brand && !price && !from && !to;
+  
   return (
     <main ref={containerRef} style={{ paddingBottom: '150px' }}>
       {isError ? (
@@ -81,7 +87,9 @@ export const Catalog = () => {
         <>
           <Filters />
           {visibleCars && <CarsList cars={visibleCars} />}
-          {!endOfData && <LoadMoreButton onClick={handlerLoadMore} />}
+          {!endOfData && isOffFilters() && (
+            <LoadMoreButton onClick={handleLoadMore} />
+          )}
         </>
       )}
     </main>

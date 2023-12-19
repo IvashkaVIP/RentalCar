@@ -23,9 +23,9 @@ export const ContainerModal = styled.div`
 `;
 
 export const Description = styled.p`
-font-size: 14px;
-font-weight: 400;
-line-height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 `;
 
 export const TitleTextBlock = styled.h4`
@@ -48,7 +48,7 @@ export const RentalCondition = styled.div`
 
 export const RentalCarButton = styled.a`
   background-color: var(--normal-button-color);
-  color: #ffffff; 
+  color: #ffffff;
   margin-top: 24px;
   padding: 12px 50px;
   font-size: 14px;

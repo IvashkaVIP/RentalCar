@@ -8,7 +8,7 @@ export const WrapperLoadMore = styled.div`
 
 export const LoadMoreBtn = styled.button`
   width: fit-content;
-  height: fit-content;  
+  height: fit-content;
   margin-right: auto;
   margin-left: auto;
   font-size: 16px;

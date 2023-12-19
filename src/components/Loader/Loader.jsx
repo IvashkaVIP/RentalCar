@@ -1,11 +1,11 @@
 import { RotatingLines } from 'react-loader-spinner';
 
-export const Loader = ({ display }) => (
+export const Loader = () => (
   <div
     style={{
-      display: "flex",
+      display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',      
+      alignItems: 'center',
       width: '100%',
       height: '100vh',
     }}

@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import { useEffect, Fragment } from 'react';
 import {
   Overlay,
-  ContainerModal,  
+  ContainerModal,
   Description,
   TitleTextBlock,
   RentalCondition,
@@ -42,29 +42,27 @@ export const Modal = ({ car, closeModal }) => {
   return createPortal(
     <>
       <Overlay onClick={handleBackdropClick}>
-        <ContainerModal>          
-            <WrapperIcon offset={'16px'}>
-              <CloseIcon onClick={closeModal} />
-            </WrapperIcon>
-            <WrapperImage height={'248px'}>
-              <StyleImage src={img || photoLink} alt={make} />
-            </WrapperImage>
-            <TitleText car={car} fontSize={'18px'} price={false} />
-            <DescriptionTextList car={car} style={{ marginTop: '8px' }} />
-            <Description style={{ marginTop: '14px' }}>
-              {description}
-            </Description>
+        <ContainerModal>
+          <WrapperIcon offset={'16px'}>
+            <CloseIcon onClick={closeModal} />
+          </WrapperIcon>
+          <WrapperImage height={'248px'}>
+            <StyleImage src={img || photoLink} alt={make} />
+          </WrapperImage>
+          <TitleText car={car} fontSize={'18px'} price={false} />
+          <DescriptionTextList car={car} style={{ marginTop: '8px' }} />
+          <Description style={{ marginTop: '14px' }}>{description}</Description>
 
-            <TitleTextBlock style={{ marginTop: '24px' }}>
-              Accessories and functionalities:
-            </TitleTextBlock>
-            <SupportingTextList car={car} style={{ marginTop: '8px' }} />
+          <TitleTextBlock style={{ marginTop: '24px' }}>
+            Accessories and functionalities:
+          </TitleTextBlock>
+          <SupportingTextList car={car} style={{ marginTop: '8px' }} />
 
-            <TitleTextBlock style={{ marginTop: '24px' }}>
-              Rental Conditions:
-            </TitleTextBlock>
+          <TitleTextBlock style={{ marginTop: '24px' }}>
+            Rental Conditions:
+          </TitleTextBlock>
 
-            <RentalConditionalList car={car} style={{ marginTop: '8px' }} />          
+          <RentalConditionalList car={car} style={{ marginTop: '8px' }} />
 
           <RentalCarButton href="tel:+380730000000">Rental car</RentalCarButton>
         </ContainerModal>
@@ -84,7 +82,7 @@ export const RentalConditionalList = ({ car, style }) => {
   const minAge = rentalConditions.match(/Minimum age: (\d+)/)[1];
 
   return (
-    <>      
+    <>
       <div style={{ marginTop: '8px' }}>
         {minAge && (
           <RentalCondition style={{ marginRight: '8px' }}>
@@ -106,7 +104,7 @@ export const RentalConditionalList = ({ car, style }) => {
         </RentalCondition>
         <RentalCondition>
           Price: <AccentText>{price}</AccentText>
-        </RentalCondition>        
+        </RentalCondition>
       </div>
     </>
   );
@@ -171,5 +169,13 @@ export const SupportingTextList = ({ car, style }) => {
 };
 
 const Separator = () => (
-  <span style={{ color: 'var(--decoration-color)', padding: '0 6px' }}>|</span>
+  <span
+    style={{
+      fontWeight: 'bold',
+      color: 'var(--decoration-color)',
+      padding: '0 6px',
+    }}
+  >
+    |
+  </span>
 );

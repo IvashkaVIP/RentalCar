@@ -1,6 +1,4 @@
 import { useState } from 'react';
-// import { useSelector} from 'react-redux';
-// import {filtersSelectors} from "../../redux/Filters/filtersSelectors"
 import { Container } from './CarsList.styled';
 import { CarItem } from '../CarItem/CarItem';
 import { Modal } from '../../components';
@@ -10,18 +8,6 @@ export const CarsList = ({ cars }) => {
   const openModal = id => setSelectedCarId(id);
   const closeModal = () => setSelectedCarId(null);
   const getSelectedCarById = () => cars.find(car => car.id === selectedCarId);
-
-  // const areFiltersOn = obj =>
-  // {
-  // //  const res = !Object.values(obj).every(
-  //   //  value => value === '' || value === null);
-    
-  //   const res= obj.brand
-  // return res;
-  // }
-  
-  // const filter = useSelector(filtersSelectors.getAllFilters).brand;  
-  
 
   return (
     <Container>

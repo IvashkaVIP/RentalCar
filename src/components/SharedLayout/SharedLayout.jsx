@@ -15,7 +15,7 @@ export const SharedLayout = () => {
         <WrapperContent>
           <Logo>
             <CarIcon width="25px" height="25px" />
-               Сar Rental Warehouse
+            Сar Rental Warehouse
           </Logo>
           <nav>
             <Link to="/" end>

@@ -1,27 +1,28 @@
 import {
   // useSelector,
-  useDispatch
+  useDispatch,
 } from 'react-redux';
 // import { filtersSelectors } from 'redux/Filters/filtersSelectors';
-import {addFilters} from 'redux/Filters/filtersSlice';
+import { addFilters } from 'redux/Filters/filtersSlice';
 import { ItemInput } from './ItemInput';
 import {
   Container,
   Form,
   Button,
+  DoubleInput,
   WrapperInput,
   TextBeforeInput,
-  Label, Input,
+  Label,
+  Input,
 } from './Filters.styled';
 import { makes, prices } from '../Resources/Data/makes';
 import {
   // useEffect,
-  useState
+  useState,
 } from 'react';
 
- 
 export const Filters = () => {
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   // const filters = useSelector(filtersSelectors.getAllFilters);
   // const {
   //   // brand,
@@ -31,27 +32,30 @@ export const Filters = () => {
 
   const [selectingBrand, setSelectingBrand] = useState('');
   const [selectingPrice, setSelectingPrice] = useState('');
-  const [selectingMileage, setSelectingMileage] = useState({From : '', To: ''});
-  
-const handleClickSearchButton = () => {
-  dispatch(
-    addFilters({
-      brand: selectingBrand,
-      price: selectingPrice,
-      mileage: {
-        from: parseFloat((selectingMileage.From).replace(/,/g, '')),
-        to: parseFloat((selectingMileage.To).replace(/,/g, '')),
-      },
-    })
-  );
-};
-  
-  const handleMileageChange = e => {    
-    let { name, value } = e.target;        
-    value = value.replace(/\D/g, '');    
+  const [selectingMileage, setSelectingMileage] = useState({
+    From: '',
+    To: '',
+  });
+
+  const handleClickSearchButton = () => {
+    dispatch(
+      addFilters({
+        brand: selectingBrand,
+        price: selectingPrice,
+        mileage: {
+          from: parseFloat(selectingMileage.From.replace(/,/g, '')),
+          to: parseFloat(selectingMileage.To.replace(/,/g, '')),
+        },
+      })
+    );
+  };
+
+  const handleMileageChange = e => {
+    let { name, value } = e.target;
+    value = value.replace(/\D/g, '');
     value =
       value === '' ? '' : new Intl.NumberFormat('en-US').format(Number(value));
-    setSelectingMileage((prevState=>({...prevState, [name]: value})));
+    setSelectingMileage(prevState => ({ ...prevState, [name]: value }));
   };
 
   // console.log("Filter 1 >>>>>   Brand : ",brand)  // dev
@@ -89,7 +93,7 @@ const handleClickSearchButton = () => {
 
         <Label>
           Car mileage/ km
-          <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
+          <DoubleInput>
             <WrapperInput>
               <TextBeforeInput>From</TextBeforeInput>
               <Input
@@ -97,7 +101,6 @@ const handleClickSearchButton = () => {
                 name="From"
                 value={selectingMileage.From}
                 onChange={handleMileageChange}
-                // placeholder="From"
                 style={{
                   paddingLeft: '70px',
                   borderBottomRightRadius: 0,
@@ -113,7 +116,6 @@ const handleClickSearchButton = () => {
                 name="To"
                 value={selectingMileage.To}
                 onChange={handleMileageChange}
-                // placeholder="To"
                 style={{
                   paddingLeft: '45px',
                   borderBottomLeftRadius: 0,
@@ -121,13 +123,10 @@ const handleClickSearchButton = () => {
                 }}
               />
             </WrapperInput>
-          </div>
+          </DoubleInput>
         </Label>
 
-        <Button
-          type="submit"
-          onClick={() => handleClickSearchButton()}
-        >
+        <Button type="submit" onClick={() => handleClickSearchButton()}>
           Search
         </Button>
       </Form>

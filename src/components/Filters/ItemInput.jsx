@@ -27,7 +27,6 @@ export const ItemInput = ({
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-
     const handleKeyDown = evt => {
       if (evt.code === 'Escape') setIsOpen(false);
     };
@@ -64,7 +63,7 @@ export const ItemInput = ({
   };
 
   // console.log("ItemInput 1 >>>   CurrentPlaceHolder : ", currentPlaceHolder)
-  // console.log('ItemInput 2 >>>   Store : ', handleSelectFilter.store);    
+  // console.log('ItemInput 2 >>>   Store : ', handleSelectFilter.store);
 
   // if(handleSelectFilter.store) setCurrentPlaceHolder(handleSelectFilter.store);
 

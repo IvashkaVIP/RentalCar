@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const WrapperCard = styled.div`
+export const WrapperCard = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 426px;
-  border-radius: 4px;  
+  border-radius: 4px;
 `;
 
 export const WrapperIcon = styled.div`
@@ -18,7 +18,7 @@ export const WrapperIcon = styled.div`
 
 export const WrapperImage = styled.div`
   width: 100%;
-  height: ${(props) => (props.height ? props.height : '100%')};
+  height: ${props => (props.height ? props.height : '100%')};
   margin-bottom: 14px;
   border-radius: 14px;
   overflow: hidden;
@@ -38,7 +38,11 @@ export const GradientOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, var(--dark-text-color), rgba(18, 20, 23, 0) 50%);
+  background: linear-gradient(
+    to bottom,
+    var(--dark-text-color),
+    rgba(18, 20, 23, 0) 50%
+  );
 `;
 
 export const WrapperMainBlock = styled.div``;
@@ -54,7 +58,7 @@ export const LearnMoreButton = styled.button`
   border-radius: 12px;
   border: none;
   transition: background-color 0.3s ease;
-  
+
   &:hover {
     background-color: var(--hover-button-color);
   }

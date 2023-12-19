@@ -22,8 +22,7 @@ export const WrapperContent = styled.div`
   align-items: center;
   justify-content: space-between;
   max-width: 1220px;
-  margin: 0 auto; 
-  
+  margin: 0 auto;
 `;
 
 export const Logo = styled.p`

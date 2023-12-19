@@ -18,12 +18,12 @@ import { ReactComponent as NormalHeartIcon } from '../Resources/Svg/normalHeart.
 import { ReactComponent as FavoriteHeartIcon } from '../Resources/Svg/activeHeart.svg';
 
 export const CarItem = ({ car, openModal }) => {
-  const { id, make, img, photoLink } = car;  
+  const { id, make, img, photoLink } = car;
   const favoriteCarsId = useSelector(carsSelectors.getFavoriteCarsId);
-    const dispatch = useDispatch();
-    const isFavoriteCar = () => favoriteCarsId.includes(id);
+  const dispatch = useDispatch();
+  const isFavoriteCar = () => favoriteCarsId.includes(id);
   const toggleHeart = () => {
-    if (isFavoriteCar()) {    
+    if (isFavoriteCar()) {
       dispatch(deleteFavoriteCar(id));
     } else {
       dispatch(addFavoriteCar(id));
@@ -38,11 +38,7 @@ export const CarItem = ({ car, openModal }) => {
           <StyleImage src={img || photoLink} alt={make} />
           <GradientOverlay />
           <WrapperIcon offset={'14px'} onClick={toggleHeart}>
-            {isFavoriteCar() ? (
-              <FavoriteHeartIcon />
-            ) : (
-              <NormalHeartIcon />
-            )}
+            {isFavoriteCar() ? <FavoriteHeartIcon /> : <NormalHeartIcon />}
           </WrapperIcon>
         </WrapperImage>
         <TitleText car={car} />
@@ -52,4 +48,3 @@ export const CarItem = ({ car, openModal }) => {
     </WrapperCard>
   );
 };
-
