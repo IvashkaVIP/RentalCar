@@ -3,7 +3,7 @@ import { fetchCars } from '../Cars/carsOperations';
 
 const carsInitialState = {
   allCars: [],
-  favoriteCarsId: [],
+  favoriteCars: [],
   endOfData: null,
   isError: false,
   isLoading: false,
@@ -14,11 +14,12 @@ const carsSlice = createSlice({
   initialState: carsInitialState,
   reducers: {
     addFavorite(state, action) {
-      state.favoriteCarsId.push(action.payload);
+      state.favoriteCars.push(action.payload);
     },
     deleteFavorite(state, action) {
-      state.favoriteCarsId = state.favoriteCarsId.filter(
-        carId => carId !== action.payload
+
+      state.favoriteCars = state.favoriteCars.filter(
+        car => car.id !== action.payload
       );
     },     
   },
@@ -47,5 +48,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { addFavoriteCar, deleteFavoriteCar } = carsSlice.actions;
+export const { addFavorite, deleteFavorite } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;

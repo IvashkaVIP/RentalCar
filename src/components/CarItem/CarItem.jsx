@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { carsSelectors } from 'redux/Cars/carsSelectors';
 import {
-  addFavoriteCar,
-  deleteFavoriteCar,
+  addFavorite,
+  deleteFavorite,
 } from '../../redux/Cars/carsOperations';
 import {
   WrapperCard,
@@ -19,16 +19,19 @@ import { ReactComponent as FavoriteHeartIcon } from '../Resources/Svg/activeHear
 
 export const CarItem = ({ car, openModal }) => {
   const { id, make, img, photoLink } = car;
-  const favoriteCarsId = useSelector(carsSelectors.getFavoriteCarsId);
+  const favoriteCars = useSelector(carsSelectors.getFavoriteCars);
   const dispatch = useDispatch();
-  const isFavoriteCar = () => favoriteCarsId.includes(id);
+
+  const isFavoriteCar = () => favoriteCars.some(car => car.id === id);
+
   const toggleHeart = () => {
     if (isFavoriteCar()) {
-      dispatch(deleteFavoriteCar(id));
+      dispatch(deleteFavorite(id));
     } else {
-      dispatch(addFavoriteCar(id));
+      dispatch(addFavorite(car));
     }
   };
+
   const onClickLearnMore = () => openModal(id);
 
   return (

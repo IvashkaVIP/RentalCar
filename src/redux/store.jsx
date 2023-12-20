@@ -16,7 +16,7 @@ import storage from 'redux-persist/lib/storage';
 const persistConfigCars = {
   key: 'cars',
   storage,
-  whitelist: ['favoriteCarsId'],
+  whitelist: ['favoriteCars'],
 };
 
 export const rootReducer = combineReducers({

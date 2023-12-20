@@ -1,15 +1,14 @@
 import { useSelector } from 'react-redux';
 import { carsSelectors } from 'redux/Cars/carsSelectors';
-import { CarsList, NoFavorites } from '../../components';
+import { CarsList, ServiceMessage } from '../../components';
 
 export const Favorites = () => {
-  const allCars = useSelector(carsSelectors.getAllCars);
-  const favoriteCarsId = useSelector(carsSelectors.getFavoriteCarsId);
-  const favoriteCars = allCars.filter(item => favoriteCarsId.includes(item.id));
+  const favoriteCars = useSelector(carsSelectors.getFavoriteCars);
+  
   return (
     <main style={{ paddingTop: '50px' }}>
-      {!favoriteCarsId.length ? (
-        <NoFavorites />
+      {!favoriteCars.length ? (
+        <ServiceMessage message="there are no selected cars in your list"/>
       ) : (
         <CarsList cars={favoriteCars} />
       )}

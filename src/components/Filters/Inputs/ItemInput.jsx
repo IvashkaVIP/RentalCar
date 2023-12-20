@@ -12,7 +12,7 @@ import {
   ItemDropDownList,
   ToggleChevron,
 } from './ItemInput.styled';
-import { ReactComponent as ToggleChevronIcon } from '../Resources/Svg/chevron.svg';
+import { ReactComponent as ToggleChevronIcon } from '../../Resources/Svg/chevron.svg';
 
 export const ItemInput = ({
   id,
@@ -21,9 +21,12 @@ export const ItemInput = ({
   label,
   placeholder,
   handleSelectFilter,
-  store,
 }) => {
-  const [currentPlaceHolder, setCurrentPlaceHolder] = useState(placeholder);
+  const [currentPlaceHolder, setCurrentPlaceHolder] = useState(
+      placeholder.store
+      ? handleSelectFilter.viewPlaceholder(placeholder.store)
+      : placeholder.default
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -54,18 +57,13 @@ export const ItemInput = ({
     let newChoice = choice;
     if (choice === data[0]) {
       newChoice = '';
-      setCurrentPlaceHolder(placeholder);
+      setCurrentPlaceHolder(placeholder.default);
     } else {
       setCurrentPlaceHolder(handleSelectFilter.viewPlaceholder(choice));
     }
     handleSelectFilter.settingChoice(newChoice);
     setIsOpen(false);
   };
-
-  // console.log("ItemInput 1 >>>   CurrentPlaceHolder : ", currentPlaceHolder)
-  // console.log('ItemInput 2 >>>   Store : ', handleSelectFilter.store);
-
-  // if(handleSelectFilter.store) setCurrentPlaceHolder(handleSelectFilter.store);
 
   return (
     <ContainerInput width={width}>

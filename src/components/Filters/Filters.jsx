@@ -1,10 +1,7 @@
-import {
-  // useSelector,
-  useDispatch,
-} from 'react-redux';
-// import { filtersSelectors } from 'redux/Filters/filtersSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import {filtersSelectors} from '../../redux/Filters/filtersSelectors.js'
 import { addFilters } from 'redux/Filters/filtersSlice';
-import { ItemInput } from './ItemInput';
+import { ItemInput } from './Inputs/ItemInput';
 import {
   Container,
   Form,
@@ -16,25 +13,18 @@ import {
   Input,
 } from './Filters.styled';
 import { makes, prices } from '../Resources/Data/makes';
-import {
-  // useEffect,
-  useState,
-} from 'react';
+import { useState } from 'react';
+
 
 export const Filters = () => {
   const dispatch = useDispatch();
-  // const filters = useSelector(filtersSelectors.getAllFilters);
-  // const {
-  //   // brand,
-  //   // price,
-  //   // mileage: { from, to },
-  // } = filters;
-
-  const [selectingBrand, setSelectingBrand] = useState('');
-  const [selectingPrice, setSelectingPrice] = useState('');
+  const filters = useSelector(filtersSelectors.getAllFilters);
+  const { brand, price} = filters;
+  const [selectingBrand, setSelectingBrand] = useState("");
+  const [selectingPrice, setSelectingPrice] = useState(String(""));
   const [selectingMileage, setSelectingMileage] = useState({
-    From: '',
-    To: '',
+    From: "",
+    To: "",
   });
 
   const handleClickSearchButton = () => {
@@ -43,8 +33,8 @@ export const Filters = () => {
         brand: selectingBrand,
         price: selectingPrice,
         mileage: {
-          from: parseFloat(selectingMileage.From.replace(/,/g, '')),
-          to: parseFloat(selectingMileage.To.replace(/,/g, '')),
+          from: parseFloat(selectingMileage.From?.replace(/,/g, '')),
+          to: parseFloat(selectingMileage.To?.replace(/,/g, '')),
         },
       })
     );
@@ -55,12 +45,11 @@ export const Filters = () => {
     value = value.replace(/\D/g, '');
     value =
       value === '' ? '' : new Intl.NumberFormat('en-US').format(Number(value));
+    if (value === '0') value = '';
     setSelectingMileage(prevState => ({ ...prevState, [name]: value }));
   };
 
-  // console.log("Filter 1 >>>>>   Brand : ",brand)  // dev
-
-  return (
+return (
     <Container>
       <Form name="search_form">
         <ItemInput
@@ -68,11 +57,9 @@ export const Filters = () => {
           data={makes}
           width="224px"
           label="Car brand"
-          // placeholder={brand ? brand : 'Enter the text'}
-          placeholder="Enter the text"
+          placeholder={{ default: 'Enter the text', store: brand }}
           handleSelectFilter={{
             settingChoice: choice => {
-              console.log('callback 1 >>> choice: ', choice);
               setSelectingBrand(choice);
             },
             viewPlaceholder: choice => choice,
@@ -84,7 +71,7 @@ export const Filters = () => {
           data={prices}
           width="125px"
           label="Price/ 1 hour"
-          placeholder="To  $"
+          placeholder={{ default: 'To  $', store: price }}
           handleSelectFilter={{
             settingChoice: choice => setSelectingPrice(choice),
             viewPlaceholder: choice => `To  ${choice}$`,
@@ -100,7 +87,7 @@ export const Filters = () => {
                 type="text"
                 name="From"
                 value={selectingMileage.From}
-                onChange={handleMileageChange}
+                onChange={handleMileageChange}                
                 style={{
                   paddingLeft: '70px',
                   borderBottomRightRadius: 0,
@@ -114,8 +101,8 @@ export const Filters = () => {
               <Input
                 type="text"
                 name="To"
-                value={selectingMileage.To}
-                onChange={handleMileageChange}
+                value={selectingMileage.To}                
+                onChange={handleMileageChange}                
                 style={{
                   paddingLeft: '45px',
                   borderBottomLeftRadius: 0,

@@ -15,5 +15,5 @@ export const fetchCars = createAsyncThunk(
   }
 );
 
-export const addFavoriteCar = createAction('cars/addFavorite');
-export const deleteFavoriteCar = createAction('cars/deleteFavorite');
+export const addFavorite = createAction('cars/addFavorite');
+export const deleteFavorite = createAction('cars/deleteFavorite');

@@ -5,6 +5,7 @@ import { filtersSelectors } from 'redux/Filters/filtersSelectors';
 import { fetchCars } from '../../redux/Cars/carsOperations';
 import { Filters, CarsList, Error, Loader } from '../../components';
 import { LoadMoreButton } from '../../components/Button/LoadMore';
+import {ServiceMessage} from '../../components/Services/ServiceMessage/ServiceMessage'
 
 const limit = 12;
 
@@ -73,10 +74,8 @@ export const Catalog = () => {
         block: 'end',
       });
     }
-  }, [cars]);
+  }, [cars]);  
 
-  const isOffFilters = () => !brand && !price && !from && !to;
-  
   return (
     <main ref={containerRef} style={{ paddingBottom: '150px' }}>
       {isError ? (
@@ -86,8 +85,12 @@ export const Catalog = () => {
       ) : (
         <>
           <Filters />
-          {visibleCars && <CarsList cars={visibleCars} />}
-          {!endOfData && isOffFilters() && (
+          {visibleCars.length ? (
+            <CarsList cars={visibleCars} />
+          ) : (
+            <ServiceMessage message="No data on your request. Change filter settings" />
+          )}
+              {!endOfData && (            
             <LoadMoreButton onClick={handleLoadMore} />
           )}
         </>
