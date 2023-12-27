@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyles } from 'GlobalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename="/RentalCar">
@@ -19,5 +19,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  //  </React.StrictMode>
+  </React.StrictMode>
 );

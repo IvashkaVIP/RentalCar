@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { addBrandFilter } from 'redux/Filters/filtersSlice';
-// import { Label } from './Filters.styled';
 import {
   ContainerInput,
   Label,

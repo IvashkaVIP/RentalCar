@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home, Catalog, Favorites } from '../pages';
-import { SharedLayout, NotFound } from '../components';
+import { SharedLayout} from '../components';
 
 export const App = () => {
   return (
@@ -9,7 +9,7 @@ export const App = () => {
         <Route index element={<Home />} />
         <Route path="catalog" element={<Catalog />} />
         <Route path="favorites" element={<Favorites />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Home />} />
       </Route>
     </Routes>
   );

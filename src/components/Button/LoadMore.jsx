@@ -5,6 +5,5 @@ export const LoadMoreButton = ({ onClick }) => (
     <LoadMoreBtn type="button" onClick={onClick}>
       Load more
     </LoadMoreBtn>
-    ;
   </WrapperLoadMore>
 );
