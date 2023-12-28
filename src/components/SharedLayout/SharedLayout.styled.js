@@ -19,10 +19,16 @@ export const Header = styled.header`
 
 export const WrapperContent = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   max-width: 1220px;
   margin: 0 auto;
+ @media screen and (max-width: 505px) {
+    justify-content: center;
+    row-gap: 25px;
+  }
+
 `;
 
 export const Logo = styled.p`
@@ -31,12 +37,29 @@ export const Logo = styled.p`
   gap: 8px;
   font-weight: 700;
   margin: 0;
+  padding: 0 16px;
+  @media screen and (max-width: 236px) {    
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+
+`;
+
+export const Nav = styled.nav`
+  @media screen and (max-width: 300px) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Link = styled(NavLink)`
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
+  text-align: center;
   color: black;
   font-weight: 500;
 

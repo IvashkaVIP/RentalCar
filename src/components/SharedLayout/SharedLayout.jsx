@@ -3,6 +3,7 @@ import {
   WrapperContent,
   Header,
   Logo,
+  Nav,
   Link,
 } from './SharedLayout.styled';
 import { ReactComponent as CarIcon } from '../Resources/Svg/car.svg';
@@ -17,13 +18,13 @@ export const SharedLayout = () => {
             <CarIcon width="25px" height="25px" />
             Сar Rental Warehouse
           </Logo>
-          <nav>
+          <Nav>
             <Link to="/" end>
               Home
             </Link>
             <Link to="/catalog">Catalog</Link>
             <Link to="/favorites">Favorites</Link>
-          </nav>
+          </Nav>
         </WrapperContent>
       </Header>
       <Outlet />
