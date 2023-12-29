@@ -9,7 +9,7 @@ import {
   ItemDropDownList,
   ToggleChevron,
 } from './ItemInput.styled';
-import { ReactComponent as ToggleChevronIcon } from '../../Resources/Svg/chevron.svg';
+import { ReactComponent as ToggleChevronIcon } from '../../../assets/Svg/chevron.svg';
 
 export const ItemInput = ({
   id,

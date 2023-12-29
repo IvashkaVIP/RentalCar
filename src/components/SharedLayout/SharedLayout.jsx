@@ -6,7 +6,7 @@ import {
   Nav,
   Link,
 } from './SharedLayout.styled';
-import { ReactComponent as CarIcon } from '../Resources/Svg/car.svg';
+import { ReactComponent as CarIcon } from '../../assets//Svg/car.svg';
 import { Outlet } from 'react-router-dom';
 
 export const SharedLayout = () => {
