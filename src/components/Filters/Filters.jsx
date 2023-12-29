@@ -12,7 +12,7 @@ import {
   Label,
   Input,
 } from './Filters.styled';
-import { makes, prices } from '../Resources/Data/makes';
+import { makes, prices } from '../../Resources/makes.jsx';
 import { useState } from 'react';
 
 
