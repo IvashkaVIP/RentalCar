@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Loader } from '../../components';
 import {Main, Img} from '../Home/Home.styled'
-import carRentImage from '../../components/Resources/Png/CarRentPoster.png';
+import carRentImage from '../../../assets/Png/CarRentPoster.png';
 
 export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
