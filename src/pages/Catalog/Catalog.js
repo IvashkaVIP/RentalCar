@@ -4,8 +4,8 @@ import { carsSelectors } from 'redux/Cars/carsSelectors';
 import { filtersSelectors } from 'redux/Filters/filtersSelectors';
 import { fetchCars } from '../../redux/Cars/carsOperations';
 import { Filters, CarsList, Error, Loader } from '../../components';
-import { LoadMoreButton } from '../../components/Button/LoadMore';
-import {ServiceMessage} from '../../components/Services/ServiceMessage/ServiceMessage'
+import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton/LoadMore';
+import { ServiceMessage } from '../../components/Services/ServiceMessage/ServiceMessage';
 
 const limit = 12;
 
@@ -74,7 +74,7 @@ export const Catalog = () => {
         block: 'end',
       });
     }
-  }, [cars]);  
+  }, [cars]);
 
   return (
     <main ref={containerRef} style={{ paddingBottom: '150px' }}>
@@ -90,9 +90,7 @@ export const Catalog = () => {
           ) : (
             <ServiceMessage message="No data on your request. Change filter settings" />
           )}
-              {!endOfData && (            
-            <LoadMoreButton onClick={handleLoadMore} />
-          )}
+          {!endOfData && <LoadMoreButton onClick={handleLoadMore} />}
         </>
       )}
     </main>

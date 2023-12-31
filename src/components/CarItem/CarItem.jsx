@@ -9,10 +9,9 @@ import {
   WrapperIcon,
   WrapperImage,
   StyleImage,
-  GradientOverlay,
-  LearnMoreButton,
-  WrapperMainBlock,
+  GradientOverlay,  
 } from './CarItem.styled';
+import {LearnMoreButton} from '../Buttons/LearnMoreButton/LearnMoreButton.styled'
 import { TitleText, DescriptionText } from '../../components';
 import { ReactComponent as NormalHeartIcon } from '../../assets/Svg/normalHeart.svg';
 import { ReactComponent as FavoriteHeartIcon } from '../../assets/Svg/activeHeart.svg';
@@ -36,7 +35,7 @@ export const CarItem = ({ car, openModal }) => {
 
   return (
     <WrapperCard>
-      <WrapperMainBlock>
+      <>
         <WrapperImage height={'268px'}>
           <StyleImage src={img || photoLink} alt={make} />
           <GradientOverlay />
@@ -46,7 +45,7 @@ export const CarItem = ({ car, openModal }) => {
         </WrapperImage>
         <TitleText car={car} />
         <DescriptionText car={car} />
-      </WrapperMainBlock>
+      </>
       <LearnMoreButton onClick={onClickLearnMore}>Learn More</LearnMoreButton>
     </WrapperCard>
   );
